@@ -480,14 +480,15 @@
   .chat-form{display:flex;gap:8px;margin-top:10px} .chat-form input{flex:1;min-width:0;background:var(--bg);border:1px solid var(--line);border-radius:10px;color:var(--ink);font:inherit;font-size:15px;padding:10px 12px} .chat-form button{flex:none}
 
   /* Before / After */
-  .ba-wrap{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#0a0a18;aspect-ratio:16/10.2}
+  .ba-wrap{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#0a0a18;aspect-ratio:16/10.2;cursor:ew-resize;touch-action:none;user-select:none;-webkit-user-select:none}
+  .ba-handle:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
   .ba-pane{position:absolute;inset:0;padding:16px} .ba-before{background:#d8d5cc;color:#333;font-family:Georgia,serif} .ba-after{background:linear-gradient(145deg,#0d0f22,#12142c);color:var(--ink);font-family:"Manrope",sans-serif}
   .ba-after-pane{clip-path:inset(0 0 0 var(--ba,50%))}
   .ba-label{position:absolute;top:10px;font-family:"Sora",sans-serif;font-size:10.5px;font-weight:800;letter-spacing:.14em;padding:5px 8px;border-radius:999px;background:rgba(0,0,0,.72);color:#fff;z-index:3} .ba-label.before{left:10px} .ba-label.after{right:10px;background:rgba(0,120,160,.85)}
   .ba-handle{position:absolute;top:0;bottom:0;left:var(--ba,50%);width:3px;background:#fff;box-shadow:0 0 16px rgba(0,207,255,.9);z-index:4;transform:translateX(-50%)} .ba-handle::after{content:"◂ ▸";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;color:#111;font-size:12px;font-weight:900;border-radius:999px;padding:7px 9px;white-space:nowrap}
   .ba-old-nav{font-size:11px;text-decoration:underline;color:#2547c9;margin-bottom:8px} .ba-old-title{font-size:24px;line-height:1.05;color:#6b1fa2} .ba-old-text{font-size:12.5px;line-height:1.35;margin-top:7px} .ba-old-box{border:2px dashed #888;padding:8px;margin-top:9px;font-size:12px;background:#fff8}
   .ba-new-kicker{font-family:"Sora",sans-serif;font-size:10px;letter-spacing:.2em;color:var(--blue);font-weight:800} .ba-new-title{font-family:"Sora",sans-serif;font-size:25px;line-height:1.05;margin-top:6px} .ba-new-title span{color:var(--magenta)} .ba-new-text{font-size:13px;color:var(--muted);margin-top:7px;line-height:1.45} .ba-new-btn{display:inline-block;margin-top:10px;background:linear-gradient(100deg,var(--violet),var(--magenta),var(--blue-2));color:#fff;padding:8px 13px;border-radius:999px;font-size:12.5px;font-weight:800;font-family:"Sora",sans-serif}
-  .ba-range{width:100%;margin-top:12px;accent-color:var(--blue)}
+
 
   /* Booking + picker */
   .slot-grid{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 14px} .slot{font:inherit;font-size:14px;font-weight:700;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--muted);cursor:pointer} .slot[aria-pressed="true"]{color:#fff;background:linear-gradient(100deg,var(--violet),var(--magenta));border-color:transparent}
@@ -496,6 +497,37 @@
   .picker-row{display:flex;justify-content:space-between;gap:12px;align-items:center;width:100%;text-align:left;font:inherit;padding:12px 13px;margin-bottom:8px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer} .picker-row small{display:block;color:var(--muted);font-size:13px;margin-top:2px} .picker-row .price{font-family:"Sora",sans-serif;font-weight:800;color:var(--blue);white-space:nowrap} .picker-row[aria-pressed="true"]{border-color:var(--blue);background:rgba(0,207,255,.10);box-shadow:0 0 16px rgba(0,207,255,.14)}
   .picker-total{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-family:"Sora",sans-serif;font-weight:800} .picker-total span:last-child{font-size:22px;color:var(--blue)}
   .copy-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;margin-top:16px}
+
+  /* Quote calculator demo */
+  .quote-label{display:block;font-family:"Sora",sans-serif;font-weight:700;font-size:14px;margin:12px 0 6px}
+  .quote-label:first-child{margin-top:0}
+  select.demo-input{appearance:auto;cursor:pointer}
+  .quote-addons{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  @media(max-width:480px){.quote-addons{grid-template-columns:1fr}}
+  .quote-addon{display:flex;justify-content:space-between;align-items:center;gap:10px;font:inherit;font-size:14px;font-weight:700;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--muted);cursor:pointer;text-align:left}
+  .quote-addon .price{font-family:"Sora",sans-serif;font-weight:800;color:var(--blue);white-space:nowrap}
+  .quote-addon[aria-pressed="true"]{color:#fff;border-color:var(--blue);background:rgba(0,207,255,.12)}
+  .quote-breakdown{margin-top:14px;border-top:1px solid var(--line);padding-top:12px;display:grid;gap:5px;font-size:14.5px;color:var(--muted)}
+  .quote-breakdown div{display:flex;justify-content:space-between;gap:12px}
+  .quote-breakdown div span:last-child{color:var(--ink);font-weight:700;white-space:nowrap}
+  .quote-range{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding:13px 14px;border:1px dashed var(--line-strong);border-radius:12px;background:rgba(0,207,255,.05);font-family:"Sora",sans-serif;font-weight:800}
+  .quote-range span:last-child{font-size:21px;color:var(--blue);white-space:nowrap}
+  @media(max-width:480px){.quote-range span:last-child{font-size:18px}}
+
+  /* Missed-call text back demo */
+  .missed-banner{display:flex;gap:12px;align-items:center;background:rgba(233,63,216,.09);border:1px solid rgba(233,63,216,.45);border-radius:12px;padding:12px 14px;margin-bottom:12px}
+  .missed-banner .mc-icon{width:38px;height:38px;flex:none;border-radius:50%;display:grid;place-items:center;background:rgba(233,63,216,.16);border:1px solid rgba(233,63,216,.5)}
+  .missed-banner .mc-icon svg{width:19px;height:19px;stroke:var(--magenta)}
+  .missed-banner strong{font-family:"Sora",sans-serif;font-size:15px;display:block;line-height:1.3}
+  .missed-banner span{color:var(--muted);font-size:13.5px}
+  .missed-banner .mc-status{margin-left:auto;flex:none;font-family:"Sora",sans-serif;font-size:10.5px;font-weight:800;letter-spacing:.12em;color:var(--magenta)}
+  .msg.auto-tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);font-weight:800;margin-bottom:3px}
+
+  /* Reviews */
+  .reviews{background:var(--bg)}
+  .review-empty{border:1px dashed var(--line-strong);border-radius:12px;padding:22px;text-align:center;color:var(--muted);background:rgba(0,207,255,.04)}
+  .review-empty .stars{font-size:22px;letter-spacing:.3em;color:var(--blue);margin-bottom:8px}
+  .review-empty strong{color:var(--ink);font-family:"Sora",sans-serif;display:block;font-size:17px;margin-bottom:5px}
   @media(max-width:760px){.hero-in{padding-bottom:96px}}
   /* Sharp shard dissolve — no blur, no blended glow */
   @keyframes holoDissolve{0%{opacity:1}100%{opacity:.04;transform:scale(.94)}}
@@ -528,6 +560,7 @@
     </a>
     <nav class="nav-links" aria-label="Site">
       <a href="#showcase">Live Demos</a>
+      <a href="#reviews">Reviews</a>
       <a href="#services">Services</a>
       <a href="#included">What's Included</a>
       <a href="#process">Process</a>
@@ -575,6 +608,8 @@
           <span class="mini-tile"><b>◈</b> AI CHAT</span>
           <span class="mini-tile"><b>◈</b> BOOKING</span>
           <span class="mini-tile"><b>◈</b> BEFORE / AFTER</span>
+          <span class="mini-tile"><b>◈</b> INSTANT QUOTES</span>
+          <span class="mini-tile"><b>◈</b> TEXT BACK</span>
         </div>
       </div>
     </div>
@@ -586,7 +621,7 @@
       <div class="sec-head center">
         <p class="kicker">Try it yourself</p>
         <h2>This site is the demo</h2>
-        <p>Don't just read about features — try them. These four working demos show what a small business website can do, all in one matching holographic style. Every demo is labelled, and nothing here books, charges, or sends for real.</p>
+        <p>Don't just read about features — try them. These six working demos show what a small business website can do, all in one matching holographic style. Every demo is labelled, and nothing here books, charges, or sends for real.</p>
       </div>
       <div class="tile-grid">
 
@@ -636,9 +671,8 @@
                 <span class="ba-new-btn">Call Now →</span>
               </div>
               <span class="ba-label before">BEFORE</span><span class="ba-label after">AFTER</span>
-              <span class="ba-handle" aria-hidden="true"></span>
+              <span class="ba-handle" id="baHandle" tabindex="0" role="slider" aria-label="Drag to reveal the after design" aria-valuemin="0" aria-valuemax="100" aria-valuenow="68"></span>
             </div>
-            <input class="ba-range" id="baRange" type="range" min="0" max="100" value="68" aria-label="Reveal the after design" />
             <p class="tile-note">Sample redesign mock-up — not a real client. Perfect for contractors, salons, cleaners, restaurants, and any business with work to show.</p>
           </div>
         </article>
@@ -694,6 +728,128 @@
           </div>
         </article>
 
+        <article class="tile" data-tilt>
+          <span class="tile-corner tl"></span><span class="tile-corner tr"></span><span class="tile-corner bl"></span><span class="tile-corner br"></span>
+          <div class="tile-head">
+            <div class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8"/><path d="M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h.01M16 19h.01"/></svg></div>
+            <div><h3>Instant Quote Calculator</h3><p>Visitors pick their options and get an estimate on the spot.</p></div>
+            <span class="demo-badge">DEMO / SAMPLE</span>
+          </div>
+          <div class="tile-body">
+            <p style="color:var(--muted);font-size:14.5px">Sample house-cleaning business — change anything and watch the estimate rebuild itself. No integrations, just the prices the business sets, doing the math right in the browser:</p>
+            <label class="quote-label" for="quoteService">Type of clean — sample base prices</label>
+            <select class="demo-input" id="quoteService" style="margin-bottom:0">
+              <option value="120">Standard clean — $120 base</option>
+              <option value="180">Deep clean — $180 base</option>
+              <option value="240">Move-in / move-out clean — $240 base</option>
+            </select>
+            <label class="quote-label" for="quoteBeds">Bedrooms — $25 each</label>
+            <select class="demo-input" id="quoteBeds" style="margin-bottom:0">
+              <option value="1">1 bedroom</option>
+              <option value="2" selected>2 bedrooms</option>
+              <option value="3">3 bedrooms</option>
+              <option value="4">4 bedrooms</option>
+              <option value="5">5 bedrooms</option>
+            </select>
+            <label class="quote-label" for="quoteBaths">Bathrooms — $15 each</label>
+            <select class="demo-input" id="quoteBaths" style="margin-bottom:0">
+              <option value="1" selected>1 bathroom</option>
+              <option value="2">2 bathrooms</option>
+              <option value="3">3 bathrooms</option>
+              <option value="4">4 bathrooms</option>
+            </select>
+            <span class="quote-label">Add-ons — tap to include</span>
+            <div class="quote-addons">
+              <button type="button" class="quote-addon" aria-pressed="false" data-price="25">Inside fridge <span class="price">+$25</span></button>
+              <button type="button" class="quote-addon" aria-pressed="false" data-price="25">Inside oven <span class="price">+$25</span></button>
+              <button type="button" class="quote-addon" aria-pressed="false" data-price="40">Interior windows <span class="price">+$40</span></button>
+              <button type="button" class="quote-addon" aria-pressed="false" data-price="20">Laundry &amp; fold <span class="price">+$20</span></button>
+            </div>
+            <label class="quote-label" for="quoteFreq">How often?</label>
+            <select class="demo-input" id="quoteFreq" style="margin-bottom:0">
+              <option value="1">One-time</option>
+              <option value="0.9">Monthly — save 10%</option>
+              <option value="0.85">Every 2 weeks — save 15%</option>
+            </select>
+            <div class="quote-breakdown" id="quoteBreakdown" aria-live="polite"></div>
+            <div class="quote-range"><span>Instant estimate</span><span id="quoteRange">$0 – $0</span></div>
+            <a class="tile-cta" href="tel:+18166816767">Like this for your business? Call 816-681-6767 →</a>
+            <p class="tile-note">Demo only — sample business, sample prices, estimate range only. Nothing is booked, charged, or sent. On your real site, your own prices go in and the final quote is always confirmed with you first.</p>
+          </div>
+        </article>
+
+        <article class="tile" data-tilt>
+          <span class="tile-corner tl"></span><span class="tile-corner tr"></span><span class="tile-corner bl"></span><span class="tile-corner br"></span>
+          <div class="tile-head">
+            <div class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/><path d="m2 2 20 20"/></svg></div>
+            <div><h3>Missed-Call Text Back</h3><p>Miss a call on the job? Your site texts the customer back for you.</p></div>
+            <span class="demo-badge blue">DEMO</span>
+          </div>
+          <div class="tile-body">
+            <div class="missed-banner">
+              <span class="mc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/><path d="m2 2 20 20"/></svg></span>
+              <div><strong>Missed call</strong><span>A customer just called — and you're up on a ladder.</span></div>
+              <span class="mc-status" id="mcStatus">MISSED</span>
+            </div>
+            <div class="chat-box" id="textThread" aria-live="polite" style="min-height:150px">
+              <div class="msg bot">Nothing yet — tap “Text us instead” below, like your customer would, and watch the automatic text back happen.</div>
+            </div>
+            <button type="button" class="btn btn-call btn-sm" id="textBackBtn" style="width:100%; margin-top:12px">Text us instead</button>
+            <p class="tile-note">Simulated demo — no real text is sent and no number is collected. On a live site, this connects to the business's texting service so a missed call turns into a conversation instead of a lost job.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews" id="reviews">
+    <div class="wrap">
+      <div class="sec-head center">
+        <p class="kicker">Client reviews</p>
+        <h2>Reviews for Precision Web Concepts</h2>
+        <p>This is where real client reviews will live. Had a website built by Precision? Your words here help the next small business decide — leave yours below.</p>
+      </div>
+      <div class="brief-grid">
+        <div class="panel">
+          <div class="review-empty">
+            <div class="stars" aria-hidden="true">★★★★★</div>
+            <strong>No reviews posted yet — yours could be the first</strong>
+            Reviews are posted here word for word, exactly as clients send them, and only with their permission. Nothing on this page is made up.
+          </div>
+          <p style="color:var(--muted); font-size:15.5px; margin-top:18px">Every review sent in is read by a real person. When a client says it's okay to share, their review goes up here with their name and business on it — so future customers are reading the real thing, not marketing copy.</p>
+          <p style="color:var(--muted); font-size:15.5px; margin-top:12px">Prefer to talk instead? Call <a href="tel:+18166816767" style="color:var(--blue); font-weight:700; text-decoration:none">816-681-6767</a>.</p>
+        </div>
+        <div class="panel">
+          <div class="field">
+            <label for="revName">Your name</label>
+            <input type="text" id="revName" placeholder="e.g. Jordan Lee" autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="revBiz">Your business (optional)</label>
+            <input type="text" id="revBiz" placeholder="e.g. Lee's Landscaping" autocomplete="organization" />
+          </div>
+          <div class="field">
+            <label for="revStars">Your rating</label>
+            <select id="revStars">
+              <option value="5">★★★★★ — 5 stars</option>
+              <option value="4">★★★★☆ — 4 stars</option>
+              <option value="3">★★★☆☆ — 3 stars</option>
+              <option value="2">★★☆☆☆ — 2 stars</option>
+              <option value="1">★☆☆☆☆ — 1 star</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="revText">Your review</label>
+            <textarea id="revText" placeholder="What was it like working with Precision Web Concepts? What did your new website do for your business?"></textarea>
+          </div>
+          <div class="brief-actions">
+            <button type="button" class="btn btn-call btn-sm" id="reviewBtn">Leave a review →</button>
+            <span class="copied" id="reviewMsg" role="status"></span>
+          </div>
+          <p style="margin-top:16px; color:var(--muted-2); font-size:14.5px">Tapping the button opens your email app with your review pre-filled, addressed to Precisionwebandapp@gmail.com — nothing is sent until you press send there. The pre-filled email includes a line giving permission to post your review on this page; delete that line if you'd rather keep it private.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -766,6 +922,14 @@
         <div class="who">
           <h3><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg> Legal Documents</h3>
           <p>The legal pages a business website needs — privacy policy, terms, and similar documents — prepared and put in place as part of your build.</p>
+        </div>
+        <div class="who">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8"/><path d="M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h.01M16 19h.01"/></svg> Instant Quote Calculator</h3>
+          <p>Let visitors build their own estimate on your site — they pick the service and options, your prices do the math, and they get a range instantly. Try the working demo above.</p>
+        </div>
+        <div class="who">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72"/></svg> Missed-Call Text Back</h3>
+          <p>When you're on a job and can't answer, your site offers “Text us instead” and an automatic text goes back right away — so a missed call becomes a conversation, not a lost customer. See it in the demos above.</p>
         </div>
       </div>
 
@@ -1252,9 +1416,37 @@
   });
   if(chatForm){ chatForm.addEventListener('submit', function(e){ e.preventDefault(); var v = chatInput.value.trim(); if(!v) return; addMsg(v, 'user'); chatInput.value=''; setTimeout(function(){ addMsg(botAnswer(v), 'bot'); }, 280); }); }
 
-  /* --- Before / After slider --- */
-  var baRange = document.getElementById('baRange'); var baWrap = document.getElementById('baWrap');
-  if(baRange && baWrap){ baRange.addEventListener('input', function(){ baWrap.style.setProperty('--ba', baRange.value + '%'); }); }
+  /* --- Before / After slider — drag the handle on the image itself --- */
+  var baWrap = document.getElementById('baWrap'); var baHandle = document.getElementById('baHandle');
+  if(baWrap){
+    var baVal = 68;
+    function baSet(v){
+      baVal = Math.max(0, Math.min(100, v));
+      baWrap.style.setProperty('--ba', baVal + '%');
+      if(baHandle) baHandle.setAttribute('aria-valuenow', String(Math.round(baVal)));
+    }
+    function baFromEvent(e){
+      var r = baWrap.getBoundingClientRect();
+      if(r.width > 0) baSet((e.clientX - r.left) / r.width * 100);
+    }
+    var baDragging = false;
+    baWrap.addEventListener('pointerdown', function(e){
+      baDragging = true;
+      try { baWrap.setPointerCapture(e.pointerId); } catch(err){}
+      baFromEvent(e);
+      e.preventDefault();
+    });
+    baWrap.addEventListener('pointermove', function(e){ if(baDragging) baFromEvent(e); });
+    ['pointerup','pointercancel'].forEach(function(ev){ baWrap.addEventListener(ev, function(){ baDragging = false; }); });
+    if(baHandle){
+      baHandle.addEventListener('keydown', function(e){
+        if(e.key === 'ArrowLeft'){ baSet(baVal - 4); e.preventDefault(); }
+        else if(e.key === 'ArrowRight'){ baSet(baVal + 4); e.preventDefault(); }
+        else if(e.key === 'Home'){ baSet(0); e.preventDefault(); }
+        else if(e.key === 'End'){ baSet(100); e.preventDefault(); }
+      });
+    }
+  }
 
   /* --- Booking demo --- */
   function slotGroup(id){ var g = document.getElementById(id); if(!g) return {get:function(){return '';}}; var val=''; g.addEventListener('click', function(e){ var b = e.target.closest('.slot'); if(!b) return; g.querySelectorAll('.slot').forEach(function(s){ s.setAttribute('aria-pressed','false'); }); b.setAttribute('aria-pressed','true'); val = b.textContent.trim(); }); return {get:function(){return val;}}; }
@@ -1284,6 +1476,115 @@
         tile.style.transform = 'perspective(900px) rotateY(' + (x*4).toFixed(2) + 'deg) rotateX(' + (-y*4).toFixed(2) + 'deg)';
       });
       tile.addEventListener('pointerleave', function(){ tile.style.transform = ''; });
+    });
+  }
+})();
+</script>
+<script>
+(function(){
+  /* --- Instant Quote Calculator demo (sample prices, browser math only) --- */
+  var qService = document.getElementById('quoteService');
+  var qBeds = document.getElementById('quoteBeds');
+  var qBaths = document.getElementById('quoteBaths');
+  var qFreq = document.getElementById('quoteFreq');
+  var qBreak = document.getElementById('quoteBreakdown');
+  var qRange = document.getElementById('quoteRange');
+  var qAddons = document.querySelectorAll('.quote-addon');
+  function money(n){ return '$' + Math.round(n); }
+  function round5(n){ return Math.round(n / 5) * 5; }
+  function quoteCalc(){
+    if(!qService) return;
+    var base = parseInt(qService.value, 10) || 0;
+    var baseLabel = qService.options[qService.selectedIndex].text.split(' — ')[0];
+    var beds = parseInt(qBeds.value, 10) || 0;
+    var baths = parseInt(qBaths.value, 10) || 0;
+    var bedCost = beds * 25, bathCost = baths * 15;
+    var addonTotal = 0, addonNames = [];
+    qAddons.forEach(function(b){
+      if(b.getAttribute('aria-pressed') === 'true'){
+        addonTotal += parseInt(b.getAttribute('data-price'), 10) || 0;
+        addonNames.push(b.textContent.replace(/\s*\+\$\d+\s*$/, '').trim());
+      }
+    });
+    var subtotal = base + bedCost + bathCost + addonTotal;
+    var mult = parseFloat(qFreq.value) || 1;
+    var total = subtotal * mult;
+    var rows = '';
+    rows += '<div><span>' + baseLabel + ' (base)</span><span>' + money(base) + '</span></div>';
+    rows += '<div><span>' + beds + (beds === 1 ? ' bedroom' : ' bedrooms') + ' × $25</span><span>' + money(bedCost) + '</span></div>';
+    rows += '<div><span>' + baths + (baths === 1 ? ' bathroom' : ' bathrooms') + ' × $15</span><span>' + money(bathCost) + '</span></div>';
+    if(addonTotal > 0) rows += '<div><span>Add-ons: ' + addonNames.join(', ') + '</span><span>' + money(addonTotal) + '</span></div>';
+    if(mult < 1) rows += '<div><span>Recurring-clean discount</span><span>−' + Math.round((1 - mult) * 100) + '%</span></div>';
+    rows += '<div><span>Estimated total</span><span>' + money(total) + '</span></div>';
+    qBreak.innerHTML = rows;
+    qRange.textContent = money(round5(total * 0.9)) + ' – ' + money(round5(total * 1.1));
+  }
+  if(qService){
+    [qService, qBeds, qBaths, qFreq].forEach(function(el){ el.addEventListener('change', quoteCalc); });
+    qAddons.forEach(function(b){
+      b.addEventListener('click', function(){
+        b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+        quoteCalc();
+      });
+    });
+    quoteCalc();
+  }
+
+  /* --- Missed-Call Text Back demo (simulated sequence) --- */
+  var tbBtn = document.getElementById('textBackBtn');
+  var tbThread = document.getElementById('textThread');
+  var mcStatus = document.getElementById('mcStatus');
+  var tbRunning = false;
+  function tbMsg(html, who){
+    var d = document.createElement('div'); d.className = 'msg ' + who; d.innerHTML = html;
+    tbThread.appendChild(d); tbThread.scrollTop = tbThread.scrollHeight;
+  }
+  if(tbBtn && tbThread){
+    tbBtn.addEventListener('click', function(){
+      if(tbRunning) return;
+      tbRunning = true;
+      tbThread.innerHTML = '';
+      if(mcStatus) mcStatus.textContent = 'TEXTING…';
+      tbBtn.textContent = 'Texting…';
+      tbMsg('<div class="auto-tag">Automatic text · just now</div>Hi, thanks for calling Sample Home Services! Sorry we missed you — we\'re on a job right now. Reply to this text and we\'ll get right back to you.', 'bot');
+      setTimeout(function(){
+        tbMsg('Hi! My kitchen sink is leaking — do you have any openings this week?', 'user');
+      }, 1300);
+      setTimeout(function(){
+        tbMsg('<div class="auto-tag">Automatic text</div>Got it — thanks! We\'ve passed your message to the team and someone will text you back shortly with times. Talk soon.', 'bot');
+        if(mcStatus) mcStatus.textContent = 'TEXT SENT ✓';
+        tbBtn.textContent = 'Replay the demo';
+        tbRunning = false;
+      }, 2600);
+    });
+  }
+
+  /* --- Leave a review (opens email, pre-filled, nothing sent automatically) --- */
+  var revBtn = document.getElementById('reviewBtn');
+  var revMsg = document.getElementById('reviewMsg');
+  if(revBtn){
+    revBtn.addEventListener('click', function(){
+      var name = document.getElementById('revName').value.trim();
+      var biz = document.getElementById('revBiz').value.trim();
+      var stars = document.getElementById('revStars').value;
+      var text = document.getElementById('revText').value.trim();
+      var starStr = '';
+      for(var i = 0; i < 5; i++) starStr += i < parseInt(stars, 10) ? '★' : '☆';
+      var lines = [];
+      lines.push('My review of Precision Web Concepts:');
+      lines.push('');
+      lines.push('Rating: ' + starStr + ' (' + stars + ' of 5 stars)');
+      lines.push('');
+      lines.push(text || '(write your review here)');
+      lines.push('');
+      lines.push('— ' + (name || '(your name)') + (biz ? ', ' + biz : ''));
+      lines.push('');
+      lines.push('You have my permission to post this review on the Precision Web Concepts website.');
+      var subject = 'Review for Precision Web Concepts' + (biz ? ' — ' + biz : (name ? ' — ' + name : ''));
+      var href = 'mailto:Precisionwebandapp@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
+      revMsg.textContent = 'Opening your email app…';
+      setTimeout(function(){ revMsg.textContent = ''; }, 4000);
+      var a = document.createElement('a'); a.href = href; document.body.appendChild(a); a.click(); document.body.removeChild(a);
     });
   }
 })();
