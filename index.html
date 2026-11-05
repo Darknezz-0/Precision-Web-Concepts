@@ -485,6 +485,12 @@
   .ba-pane{position:absolute;inset:0;padding:16px} .ba-before{background:#d8d5cc;color:#333;font-family:Georgia,serif} .ba-after{background:linear-gradient(145deg,#0d0f22,#12142c);color:var(--ink);font-family:"Manrope",sans-serif}
   .ba-after-pane{clip-path:inset(0 0 0 var(--ba,50%))}
   .ba-label{position:absolute;top:10px;font-family:"Sora",sans-serif;font-size:10.5px;font-weight:800;letter-spacing:.14em;padding:5px 8px;border-radius:999px;background:rgba(0,0,0,.72);color:#fff;z-index:3} .ba-label.before{left:10px} .ba-label.after{right:10px;background:rgba(0,120,160,.85)}
+  /* Labels are clipped by the same --ba position that reveals the images:
+     BEFORE lives only left of the handle, AFTER only right of it, so each
+     label is sliced away as the handle slides past it. */
+  .ba-label-clip{position:absolute;inset:0;z-index:3;pointer-events:none}
+  .ba-label-clip.before-clip{clip-path:inset(0 calc(100% - var(--ba,50%)) 0 0)}
+  .ba-label-clip.after-clip{clip-path:inset(0 0 0 var(--ba,50%))}
   .ba-handle{position:absolute;top:0;bottom:0;left:var(--ba,50%);width:3px;background:#fff;box-shadow:0 0 16px rgba(0,207,255,.9);z-index:4;transform:translateX(-50%)} .ba-handle::after{content:"◂ ▸";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;color:#111;font-size:12px;font-weight:900;border-radius:999px;padding:7px 9px;white-space:nowrap}
   .ba-old-nav{font-size:11px;text-decoration:underline;color:#2547c9;margin-bottom:8px} .ba-old-title{font-size:24px;line-height:1.05;color:#6b1fa2} .ba-old-text{font-size:12.5px;line-height:1.35;margin-top:7px} .ba-old-box{border:2px dashed #888;padding:8px;margin-top:9px;font-size:12px;background:#fff8}
   .ba-new-kicker{font-family:"Sora",sans-serif;font-size:10px;letter-spacing:.2em;color:var(--blue);font-weight:800} .ba-new-title{font-family:"Sora",sans-serif;font-size:25px;line-height:1.05;margin-top:6px} .ba-new-title span{color:var(--magenta)} .ba-new-text{font-size:13px;color:var(--muted);margin-top:7px;line-height:1.45} .ba-new-btn{display:inline-block;margin-top:10px;background:linear-gradient(100deg,var(--violet),var(--magenta),var(--blue-2));color:#fff;padding:8px 13px;border-radius:999px;font-size:12.5px;font-weight:800;font-family:"Sora",sans-serif}
@@ -534,11 +540,16 @@
   @keyframes holoReform{0%{opacity:.2;transform:scale(.96)}100%{opacity:1;transform:scale(1)}}
   @media (prefers-reduced-motion: reduce){.tile,.smoke span,.mini-tile{animation:none !important}}
 
-  /* Mobile call bar */
+  /* Mobile call bar — hidden on the initial screen so it does not duplicate
+     the header and hero call buttons; JS adds .is-visible only after the
+     hero has been scrolled past. */
   .callbar{
     position:fixed; left:12px; right:12px; bottom:calc(12px + env(safe-area-inset-bottom)); z-index:60;
     display:none;
+    opacity:0; visibility:hidden; transform:translateY(16px); pointer-events:none;
+    transition:opacity .3s ease, transform .3s ease, visibility .3s ease;
   }
+  .callbar.is-visible{opacity:1; visibility:visible; transform:translateY(0); pointer-events:auto}
   @media (max-width:760px){
     .callbar{display:block}
     .callbar a{
@@ -670,7 +681,7 @@
                 <p class="ba-new-text">Clean layout, photos of your work, reviews up front — and one clear button to call, book, or order.</p>
                 <span class="ba-new-btn">Call Now →</span>
               </div>
-              <span class="ba-label before">BEFORE</span><span class="ba-label after">AFTER</span>
+              <span class="ba-label-clip before-clip" aria-hidden="true"><span class="ba-label before">BEFORE</span></span><span class="ba-label-clip after-clip" aria-hidden="true"><span class="ba-label after">AFTER</span></span>
               <span class="ba-handle" id="baHandle" tabindex="0" role="slider" aria-label="Drag to reveal the after design" aria-valuemin="0" aria-valuemax="100" aria-valuenow="68"></span>
             </div>
             <p class="tile-note">Sample redesign mock-up — not a real client. Perfect for contractors, salons, cleaners, restaurants, and any business with work to show.</p>
@@ -1586,6 +1597,25 @@
       setTimeout(function(){ revMsg.textContent = ''; }, 4000);
       var a = document.createElement('a'); a.href = href; document.body.appendChild(a); a.click(); document.body.removeChild(a);
     });
+  }
+})();
+</script>
+<script>
+(function(){
+  /* Sticky bottom call bar: show only after the hero is scrolled past,
+     so the initial phone view shows just the header + hero call buttons. */
+  var callbar = document.querySelector('.callbar');
+  var hero = document.querySelector('.hero');
+  if(!callbar || !hero) return;
+  function updateCallbar(){
+    var pastHero = hero.getBoundingClientRect().bottom <= 72;
+    callbar.classList.toggle('is-visible', pastHero);
+  }
+  updateCallbar();
+  window.addEventListener('scroll', updateCallbar, {passive:true});
+  window.addEventListener('resize', updateCallbar);
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(updateCallbar, {threshold:0}).observe(hero);
   }
 })();
 </script>
