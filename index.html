@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="color-scheme" content="dark" />
-<meta name="description" content="Precision Web Concepts builds brand-new websites for small businesses and entrepreneurs. Your Vision / Our Precision. Call 816-681-6767." />
+<meta name="description" content="Precision Web Concepts builds brand-new websites for small businesses and entrepreneurs. Your Vision / Our Precision. Email Precisionwebandapp@gmail.com to get started." />
 <link rel="icon" href="data:," />
 <title>Precision Web Concepts — New Websites for Small Businesses</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -271,6 +271,19 @@
   .pill[aria-pressed="true"]{color:#fff; border-color:transparent; background:linear-gradient(100deg, var(--violet), var(--magenta))}
   .pill:hover{border-color:var(--blue); color:var(--ink)}
   .pill[aria-pressed="true"]:hover{color:#fff}
+  .check-list{display:grid; gap:8px}
+  .check-option{
+    display:flex; gap:11px; align-items:flex-start; cursor:pointer;
+    background:var(--bg); border:1px solid var(--line); border-radius:12px; padding:11px 13px;
+    font-size:15px; font-weight:600; color:var(--muted); line-height:1.4;
+  }
+  .check-option:hover{border-color:var(--blue); color:var(--ink)}
+  .check-option:has(input:checked){border-color:var(--blue); color:var(--ink); background:rgba(0,207,255,.08)}
+  .check-option input[type="checkbox"]{
+    width:20px; height:20px; flex:none; margin:1px 0 0; cursor:pointer;
+    accent-color:#e93fd8;
+  }
+  .field .check-hint{display:block; font-size:13.5px; color:var(--muted-2); font-weight:600; margin-top:7px}
   .brief-out{
     background:var(--bg); border:1px dashed var(--line-strong); border-radius:12px; padding:18px;
     font-size:15.5px; color:var(--muted); white-space:pre-wrap; min-height:190px;
@@ -330,7 +343,55 @@
   .foot .f-brand span{display:block; font-family:"Manrope",sans-serif; font-weight:600; font-size:12.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted-2); margin-top:3px}
   .foot a{color:var(--muted); text-decoration:none; font-weight:700}
   .foot a:hover{color:var(--blue)}
+  .foot .legal-links{display:flex; flex-wrap:wrap; gap:10px 26px; align-items:center}
+  .foot .legal-links a{font-size:15px}
   .foot .copy{color:var(--muted-2); font-size:14px; width:100%; text-align:center; margin-top:10px}
+
+  /* ---------- Legal pages ---------- */
+  .legal{background:var(--bg-2); border-top:1px solid var(--line)}
+  .legal[hidden]{display:none}
+  .legal .legal-col{max-width:46em}
+  .legal h2{font-size:clamp(28px, 4vw, 38px); font-weight:800; margin-bottom:10px}
+  .legal .legal-updated{color:var(--muted-2); font-size:14.5px; margin-bottom:26px}
+  .legal .legal-note{
+    border:1px solid var(--line-strong); border-radius:12px; background:var(--panel);
+    padding:16px 18px; margin-bottom:30px; color:var(--ink); font-size:15.5px;
+  }
+  .legal .legal-note strong{color:var(--blue)}
+  .legal h3{font-size:19px; font-weight:700; margin:28px 0 8px}
+  .legal h3:first-of-type{margin-top:0}
+  .legal p{color:var(--muted); font-size:16.5px; margin-bottom:12px}
+  .legal ul{color:var(--muted); font-size:16.5px; margin:0 0 12px; padding-left:22px}
+  .legal li{margin-bottom:6px}
+  .legal p a, .legal li a{color:var(--blue); font-weight:700}
+  .legal .legal-back{display:inline-block; margin-top:30px; color:var(--blue); font-weight:700; text-decoration:none; font-size:15.5px}
+  .legal .legal-back:hover{text-decoration:underline}
+  @media (max-width:640px){ .legal p, .legal ul{font-size:16px} }
+  .legal{scroll-margin-top:84px}
+  .legal h3{scroll-margin-top:84px}
+  .legal .legal-contents{border:1px solid var(--line-strong); border-radius:12px; background:var(--panel); padding:16px 18px 10px; margin-bottom:30px}
+  .legal .legal-contents p{color:var(--ink); font-weight:700; font-size:15px; margin-bottom:10px}
+  .legal .legal-contents ol{color:var(--muted); font-size:15.5px; margin:0 0 8px; padding-left:22px}
+  .legal .legal-contents li{margin-bottom:7px}
+  .legal .legal-contents a{color:var(--muted); text-decoration:none}
+  .legal .legal-contents a:hover{color:var(--blue); text-decoration:underline}
+
+  /* ---------- Back to top ---------- */
+  .to-top{
+    position:fixed; right:22px; bottom:22px; z-index:60;
+    width:50px; height:50px; border-radius:50%; cursor:pointer;
+    display:grid; place-items:center; padding:0;
+    background:linear-gradient(160deg, rgba(18,20,44,.96), rgba(9,10,26,.96));
+    border:1px solid var(--line-strong); color:var(--blue);
+    box-shadow:0 10px 30px rgba(0,0,0,.5), 0 0 18px rgba(0,207,255,.22);
+    opacity:0; visibility:hidden; transform:translateY(12px);
+    transition:opacity .25s ease, transform .25s ease, visibility .25s ease, border-color .2s ease;
+  }
+  .to-top svg{width:22px; height:22px; stroke:var(--blue)}
+  .to-top.show{opacity:1; visibility:visible; transform:translateY(0)}
+  .to-top:hover{border-color:var(--blue)}
+  .to-top:focus-visible{outline:2px solid var(--blue); outline-offset:3px; opacity:1; visibility:visible; transform:translateY(0)}
+  @media (max-width:560px){ .to-top{right:16px; bottom:16px; width:46px; height:46px} }
 
   /* ---------- Holographic buttons & futuristic motion ---------- */
   #holo-bg{position:fixed; inset:0; z-index:0; pointer-events:none; opacity:1}
@@ -714,7 +775,7 @@
         <h1>Websites built to <em>grow</em> your <span class="v">business</span></h1>
         <p class="hero-sub">Precision Web Concepts creates <strong>brand-new websites for small businesses and entrepreneurs</strong> — designed around your goals, built to look sharp on every phone, and made to turn visitors into customers.</p>
         <div class="hero-ctas">
-          <a class="btn btn-call" href="tel:+18166816767">Call 816-681-6767</a>
+          <a class="btn btn-call" href="mailto:Precisionwebandapp@gmail.com">Email us to get started</a>
           <a class="btn btn-ghost" href="#brief">Plan your website</a>
           <a class="btn btn-ghost" href="#showcase">Try it live ↓</a>
           <span class="holo-hint" aria-hidden="true">Tap any main button — watch it shatter into sharp pieces, then rebuild. Then try the features below.</span>
@@ -722,7 +783,7 @@
         <div class="hero-points">
           <span><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> New websites, done right</span>
           <span><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Mobile-first design</span>
-          <span><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> One call to get started</span>
+          <span><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Start with a quick email</span>
         </div>
       </div>
       <div class="logo-frame">
@@ -731,7 +792,7 @@
         </div>
         <p class="logo-caption">Websites &nbsp;·&nbsp; <b>Apps</b> &nbsp;·&nbsp; <b class="pink">Digital Solutions</b></p>
         <div class="hero-mini-tiles" aria-hidden="true">
-          <span class="mini-tile"><b>◈</b> TAP-TO-CALL</span>
+          <span class="mini-tile"><b>◈</b> QUICK CONTACT</span>
           <span class="mini-tile"><b>◈</b> AI CHAT</span>
           <span class="mini-tile"><b>◈</b> BOOKING</span>
           <span class="mini-tile"><b>◈</b> BEFORE / AFTER</span>
@@ -829,7 +890,7 @@
             <input class="demo-input" id="bookName" type="text" placeholder="Your name" autocomplete="name" />
             <button type="button" class="btn btn-call btn-sm" id="bookBtn" style="width:100%">Confirm booking</button>
             <div class="demo-result" id="bookResult">Pick a day and time, add your name, and see how a booking confirmation would feel on your site.</div>
-            <p class="tile-note">To book with Precision for real, call 816-681-6767.</p>
+            <p class="tile-note">To start with Precision for real, email Precisionwebandapp@gmail.com or fill out the brief form below — or call if you prefer.</p>
           </div>
         </article>
 
@@ -897,7 +958,7 @@
             </select>
             <div class="quote-breakdown" id="quoteBreakdown" aria-live="polite"></div>
             <div class="quote-range"><span>Instant estimate</span><span id="quoteRange">$0 – $0</span></div>
-            <a class="tile-cta" href="tel:+18166816767">Like this for your business? Call 816-681-6767 →</a>
+            <a class="tile-cta" href="#brief">Like this for your business? Plan it in the brief below →</a>
             <p class="tile-note">On your real site, your own prices go in and the final quote is always confirmed with you first.</p>
           </div>
         </article>
@@ -922,6 +983,69 @@
           </div>
         </article>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- BRIEF BUILDER -->
+  <section id="brief">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker">Start your project</p>
+        <h2>Sketch your website in 60 seconds</h2>
+        <p>Answer a few quick questions and this page builds your brief. Submit it and it opens in your email app, addressed to Precisionwebandapp@gmail.com — just press send there. Questions first? Email Precisionwebandapp@gmail.com — or call if you prefer.</p>
+      </div>
+      <div class="brief-grid">
+        <div class="panel">
+          <div class="field">
+            <label for="bizName">Your business name</label>
+            <input type="text" id="bizName" placeholder="e.g. Lee's Landscaping" autocomplete="organization" />
+          </div>
+          <div class="field">
+            <span class="flabel" id="typeLabel">What kind of business is it?</span>
+            <div class="pills" role="group" aria-labelledby="typeLabel" id="typePills">
+              <button type="button" class="pill" aria-pressed="false">Trades / Home Services</button>
+              <button type="button" class="pill" aria-pressed="false">Restaurant / Café</button>
+              <button type="button" class="pill" aria-pressed="false">Salon / Barber</button>
+              <button type="button" class="pill" aria-pressed="false">Consulting / Coaching</button>
+              <button type="button" class="pill" aria-pressed="false">Shop / Retail</button>
+              <button type="button" class="pill" aria-pressed="false">Something else</button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="flabel" id="goalLabel">Why do you want a website?</span>
+            <div class="check-list" role="group" aria-labelledby="goalLabel" id="goalChecks">
+              <label class="check-option"><input type="checkbox" name="siteReason" value="Get more calls" /> <span>Get more calls</span></label>
+              <label class="check-option"><input type="checkbox" name="siteReason" value="Explain my services" /> <span>Explain my services</span></label>
+              <label class="check-option"><input type="checkbox" name="siteReason" value="Look professional &amp; established" /> <span>Look professional &amp; established</span></label>
+              <label class="check-option"><input type="checkbox" name="siteReason" value="Show my work / menu / products" /> <span>Show my work / menu / products</span></label>
+            </div>
+            <span class="check-hint">You can tick more than one — choose all that apply.</span>
+          </div>
+          <div class="field">
+            <label for="bizNotes">Anything else? Services, pages, deadlines…</label>
+            <textarea id="bizNotes" placeholder="e.g. I need a services page, a gallery of recent jobs, and I'd like to be live before spring."></textarea>
+          </div>
+          <div class="field">
+            <span class="flabel" id="photoLabel">Photos of your work (optional)</span>
+            <p class="photo-help">Photos of your work (optional) — you can't upload photos here. When you tap Submit, your email app will open — attach your photos to that email. Use the boxes below to write a short description for each photo you will attach, so I know what each photo shows, and label the photos in your email to match, e.g. Photo 1, Photo 2.</p>
+            <div id="photoList" role="group" aria-labelledby="photoLabel"></div>
+            <button type="button" class="btn btn-ghost btn-sm" id="addPhotoBtn">+ Add another photo</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="field">
+            <span class="flabel">Your brief — updates as you type</span>
+            <div class="brief-out" id="briefOut" aria-live="polite"></div>
+          </div>
+          <div class="brief-actions">
+            <button type="button" class="btn btn-call btn-sm" id="submitBtn">Submit my brief →</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="copyBtn">Copy brief</button>
+            <a class="btn btn-ghost btn-sm" href="mailto:Precisionwebandapp@gmail.com">Email us instead</a>
+            <span class="copied" id="copiedMsg" role="status"></span>
+          </div>
+          <p style="margin-top:16px; color:var(--muted-2); font-size:14.5px">Submitting opens your email app with this brief pre-filled to Precisionwebandapp@gmail.com — nothing is sent until you press send there.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -952,8 +1076,6 @@
               <span>Mike and Son's Cabinets</span>
             </figcaption>
           </figure>
-          <p style="color:var(--muted); font-size:15.5px; margin-top:18px">Every review sent in is read by a real person. When a client says it's okay to share, their review goes up here with their name and business on it — so future customers are reading the real thing, not marketing copy.</p>
-          <p style="color:var(--muted); font-size:15.5px; margin-top:12px">Prefer to talk instead? Call <a href="tel:+18166816767" style="color:var(--blue); font-weight:700; text-decoration:none">816-681-6767</a>.</p>
         </div>
         <div class="panel">
           <div class="field">
@@ -982,7 +1104,6 @@
             <button type="button" class="btn btn-call btn-sm" id="reviewBtn">Leave a review →</button>
             <span class="copied" id="reviewMsg" role="status"></span>
           </div>
-          <p style="margin-top:16px; color:var(--muted-2); font-size:14.5px">Tapping the button opens your email app with your review pre-filled, addressed to Precisionwebandapp@gmail.com — nothing is sent until you press send there. The pre-filled email includes a line giving permission to post your review on this page; delete that line if you'd rather keep it private.</p>
         </div>
       </div>
     </div>
@@ -1071,7 +1192,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4"/><path d="m19.07 4.93-2.83 2.83"/><path d="M22 12h-4"/><path d="m19.07 19.07-2.83-2.83"/><path d="M12 22v-4"/><path d="m4.93 19.07 2.83-2.83"/><path d="M2 12h4"/><path d="m4.93 4.93 2.83 2.83"/></svg>
         <div>
           <h3>More services are available</h3>
-          <p>These are just the most requested add-ons. If there's something you want your website to do that isn't listed here, ask about it when you call <a href="tel:+18166816767" style="color:var(--blue); font-weight:700; text-decoration:none">816-681-6767</a> — chances are it can be built into your project.</p>
+          <p>These are just the most requested add-ons. If there's something you want your website to do that isn't listed here, ask about it when you email <a href="mailto:Precisionwebandapp@gmail.com" style="color:var(--blue); font-weight:700; text-decoration:none">Precisionwebandapp@gmail.com</a> or fill out the brief form above — or call if you prefer. Chances are it can be built into your project.</p>
         </div>
       </div>
     </div>
@@ -1139,75 +1260,13 @@
       <div class="sec-head">
         <p class="kicker">How it works</p>
         <h2>From first message to launch day</h2>
-        <p>A simple, straight-line process. You always know what happens next — and you do <strong>not</strong> need to make a phone call to get started. Filling out the brief form below is enough; a call is only there if you prefer to talk.</p>
+        <p>A simple, straight-line process. You always know what happens next — and you do <strong>not</strong> need to make a phone call to get started. Filling out the brief form above is enough; a call is only there if you prefer to talk.</p>
       </div>
       <div class="steps">
-        <div class="step"><span class="num">1</span><h3>Fill out the brief</h3><p>Start with the <a href="#brief" style="color:var(--blue); font-weight:700; text-decoration:none">brief form below</a> — your business, your customers, and what you want your website to do. That message on its own is enough to get started; no phone call is required.</p></div>
+        <div class="step"><span class="num">1</span><h3>Fill out the brief</h3><p>Start with the <a href="#brief" style="color:var(--blue); font-weight:700; text-decoration:none">brief form above</a> — your business, your customers, and what you want your website to do. That message on its own is enough to get started; no phone call is required.</p></div>
         <div class="step"><span class="num">2</span><h3>We review &amp; reply</h3><p>Rob reviews your brief and replies to you with a design direction built around your brand and goals — and a clear price quoted up front before building starts. Half of the quote is required up front to get your project going.</p></div>
-        <div class="step"><span class="num">3</span><h3>Call if you prefer to talk</h3><p>Optional, and entirely up to you: if you'd rather talk it through, call <a href="tel:+18166816767" style="color:var(--blue); font-weight:700; text-decoration:none">816-681-6767</a>. If you'd rather not call, that's fine — the form message already got things started.</p></div>
+        <div class="step"><span class="num">3</span><h3>Talk it through if you prefer</h3><p>Optional, and entirely up to you: if you'd rather talk it through, you can call if you prefer — the number is in the header at the top and in the contact section at the bottom of this page. If you'd rather not call, that's fine — email and the form message already got things started.</p></div>
         <div class="step"><span class="num">4</span><h3>We build &amp; you launch</h3><p>Your site is built mobile-first, with your content, photos, and contact details in place. You review it before it goes live — then your website launches, ready for customers, with a walkthrough of your finished site so you know how it all works.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- BRIEF BUILDER -->
-  <section id="brief">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="kicker">Start your project</p>
-        <h2>Sketch your website in 60 seconds</h2>
-        <p>Answer a few quick questions and this page builds your brief. Submit it and it opens in your email app, addressed to Precisionwebandapp@gmail.com — just press send there. Prefer to talk? Call 816-681-6767.</p>
-      </div>
-      <div class="brief-grid">
-        <div class="panel">
-          <div class="field">
-            <label for="bizName">Your business name</label>
-            <input type="text" id="bizName" placeholder="e.g. Lee's Landscaping" autocomplete="organization" />
-          </div>
-          <div class="field">
-            <span class="flabel" id="typeLabel">What kind of business is it?</span>
-            <div class="pills" role="group" aria-labelledby="typeLabel" id="typePills">
-              <button type="button" class="pill" aria-pressed="false">Trades / Home Services</button>
-              <button type="button" class="pill" aria-pressed="false">Restaurant / Café</button>
-              <button type="button" class="pill" aria-pressed="false">Salon / Barber</button>
-              <button type="button" class="pill" aria-pressed="false">Consulting / Coaching</button>
-              <button type="button" class="pill" aria-pressed="false">Shop / Retail</button>
-              <button type="button" class="pill" aria-pressed="false">Something else</button>
-            </div>
-          </div>
-          <div class="field">
-            <span class="flabel" id="goalLabel">What's the main job of your website?</span>
-            <div class="pills" role="group" aria-labelledby="goalLabel" id="goalPills">
-              <button type="button" class="pill" aria-pressed="false">Get more calls</button>
-              <button type="button" class="pill" aria-pressed="false">Explain my services</button>
-              <button type="button" class="pill" aria-pressed="false">Look professional &amp; established</button>
-              <button type="button" class="pill" aria-pressed="false">Show my work / menu / products</button>
-            </div>
-          </div>
-          <div class="field">
-            <label for="bizNotes">Anything else? Services, pages, deadlines…</label>
-            <textarea id="bizNotes" placeholder="e.g. I need a services page, a gallery of recent jobs, and I'd like to be live before spring."></textarea>
-          </div>
-          <div class="field">
-            <span class="flabel" id="photoLabel">Photos of your work — each photo needs its own short description</span>
-            <p class="photo-help">Photos of your work help a lot — <strong>but a photo alone is not enough.</strong> I can't always tell what's in a photo or what work you did in it. So for <strong>every</strong> photo you plan to send, write a short description below: what the photo shows, and what work you did in it. When you send the photos with your email, label them Photo 1, Photo 2, and so on to match these boxes — that way each description stays with the photo it describes.</p>
-            <div id="photoList" role="group" aria-labelledby="photoLabel"></div>
-            <button type="button" class="btn btn-ghost btn-sm" id="addPhotoBtn">+ Add another photo</button>
-          </div>
-        </div>
-        <div class="panel">
-          <div class="field">
-            <span class="flabel">Your brief — updates as you type</span>
-            <div class="brief-out" id="briefOut" aria-live="polite"></div>
-          </div>
-          <div class="brief-actions">
-            <button type="button" class="btn btn-call btn-sm" id="submitBtn">Submit my brief →</button>
-            <button type="button" class="btn btn-ghost btn-sm" id="copyBtn">Copy brief</button>
-            <a class="btn btn-ghost btn-sm" href="tel:+18166816767">Call 816-681-6767</a>
-            <span class="copied" id="copiedMsg" role="status"></span>
-          </div>
-          <p style="margin-top:16px; color:var(--muted-2); font-size:14.5px">Submitting opens your email app with this brief pre-filled to Precisionwebandapp@gmail.com — nothing is sent until you press send there.</p>
-        </div>
       </div>
     </div>
   </section>
@@ -1217,20 +1276,20 @@
     <div class="wrap">
       <div class="sec-head center">
         <p class="kicker">Questions</p>
-        <h2>Before you call</h2>
+        <h2>Common questions</h2>
       </div>
       <div class="faq-list">
         <details>
           <summary>Do you redesign existing websites?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></summary>
-          <p>Right now, Precision Web Concepts is focused on brand-new websites. If you already have a site, call <a href="tel:+18166816767">816-681-6767</a> anyway — in many cases a fresh, purpose-built site is a better investment than patching an old one, and we can talk through which makes sense for you.</p>
+          <p>Right now, Precision Web Concepts is focused on brand-new websites. If you already have a site, email <a href="mailto:Precisionwebandapp@gmail.com">Precisionwebandapp@gmail.com</a> anyway — or call if you prefer. In many cases a fresh, purpose-built site is a better investment than patching an old one, and we can talk through which makes sense for you.</p>
         </details>
         <details>
           <summary>How much does a website cost?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></summary>
-          <p>Prices vary depending on what you want — how many pages, which features and services you add, and how much content you already have. Every project is quoted up front before any work begins, so there are no surprises, and half of the quote is required up front to start your project. Call <a href="tel:+18166816767">816-681-6767</a> and talk through your project to get your quote.</p>
+          <p>Prices vary depending on what you want — how many pages, which features and services you add, and how much content you already have. Every project is quoted up front before any work begins, so there are no surprises, and half of the quote is required up front to start your project. Email Precisionwebandapp@gmail.com or fill out the brief form to talk through your project and get your quote — or call if you prefer.</p>
         </details>
         <details>
           <summary>What extra services can I add?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></summary>
-          <p>Along with your new website, you can add branding and logo creation, AI chat support integrated into your site, a testimonials section for your customer reviews, and legal documents like a privacy policy and terms. More services are available too — if you have something in mind, ask about it on your call: <a href="tel:+18166816767">816-681-6767</a>.</p>
+          <p>Along with your new website, you can add branding and logo creation, AI chat support integrated into your site, a testimonials section for your customer reviews, and legal documents like a privacy policy and terms. More services are available too — if you have something in mind, ask about it when you email Precisionwebandapp@gmail.com or fill out the brief form — or call if you prefer.</p>
         </details>
         <details>
           <summary>What do you need from me to get started?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></summary>
@@ -1242,7 +1301,7 @@
         </details>
         <details>
           <summary>How do I get started?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></summary>
-          <p>Fill out the <a href="#brief">brief form</a> on this page — tell us about your business and what you want your website to do, and we'll take it from there: we review it, reply to you, then design, build, and launch. A phone call is not required to get started. If you prefer to talk instead, you can call <a href="tel:+18166816767">816-681-6767</a> — but that's optional, only if you want it.</p>
+          <p>Fill out the <a href="#brief">brief form</a> on this page — tell us about your business and what you want your website to do, and we'll take it from there: we review it, reply to you, then design, build, and launch. A phone call is not required to get started. If you prefer to talk instead, you can call if you prefer — the number is in the header at the top and in the contact section at the bottom of this page — but that's optional, only if you want it.</p>
         </details>
       </div>
     </div>
@@ -1253,15 +1312,291 @@
     <div class="wrap">
       <p class="kicker" style="margin-bottom:14px">Ready when you are</p>
       <h2>Your vision. Our precision.<br />Let's build your website.</h2>
-      <p class="lead">Tell us about your business and what you want your website to do. One call is all it takes to get started.</p>
+      <p class="lead">Tell us about your business and what you want your website to do. Start with the brief form above or email Precisionwebandapp@gmail.com — that is the best way to get started. Prefer to talk? You can call the number below.</p>
       <a class="big-number" href="tel:+18166816767"><small>Call Precision Web Concepts</small>816-681-6767</a>
-      <div><a class="btn btn-call" href="tel:+18166816767">Tap to Call Now</a></div>
-      <div class="copy-row">
-        <span style="color:var(--muted);font-size:15px">Can't tap to call? Copy the number:</span>
-        <button type="button" class="btn btn-ghost btn-sm" id="copyNumberBtn">Copy 816-681-6767</button>
-        <span class="copied" id="copyNumberMsg" role="status"></span>
-      </div>
+      <div><a class="btn btn-call" href="mailto:Precisionwebandapp@gmail.com">Email Precisionwebandapp@gmail.com</a></div>
       <p class="contact-note">New website projects for small businesses &amp; entrepreneurs. Email: Precisionwebandapp@gmail.com</p>
+    </div>
+  </section>
+
+  <noscript><style>.legal[hidden]{display:block}</style></noscript>
+
+  <!-- LEGAL: TERMS OF SERVICE -->
+  <section class="legal" id="terms" hidden>
+    <div class="wrap">
+      <div class="legal-col">
+        <h2>Terms of Service</h2>
+        <p class="legal-updated">Precision Web Concepts<br>Effective Date: November 5, 2026</p>
+        <nav class="legal-contents" aria-label="Contents">
+          <p>Contents — 14 sections</p>
+          <ol>
+          <li><a href="#t1">Payment Terms</a></li>
+          <li><a href="#t2">Client Responsibilities</a></li>
+          <li><a href="#t3">Project Timelines and Delays</a></li>
+          <li><a href="#t4">Project Scope and Additional Work</a></li>
+          <li><a href="#t5">Revisions and Design Approval</a></li>
+          <li><a href="#t6">Website Launch and Completion</a></li>
+          <li><a href="#t7">Ownership and Intellectual Property</a></li>
+          <li><a href="#t8">Third-Party Services and Expenses</a></li>
+          <li><a href="#t9">Maintenance and Ongoing Support</a></li>
+          <li><a href="#t10">Cancellations and Refunds</a></li>
+          <li><a href="#t11">Limitation of Liability</a></li>
+          <li><a href="#t12">Changes to These Terms</a></li>
+          <li><a href="#t13">Governing Law</a></li>
+          <li><a href="#t14">Contact Information</a></li>
+          </ol>
+        </nav>
+
+
+        <p>These Terms of Service govern the website design and development services provided by Precision Web Concepts ("we," "us," or "our"). By purchasing or engaging our services, you ("Client" or "you") agree to the following terms.</p>
+
+        <h3 id="t1">1. Payment Terms</h3>
+        <p>A 50% initial payment is required before any project work begins. The remaining 50% is due on or before the scheduled website launch date.</p>
+        <p>Your website will not be published or made publicly accessible until the project has been paid for in full.</p>
+        <p>Any additional services or work outside the original project scope must be approved in writing and may require additional payment.</p>
+
+        <h3 id="t2">2. Client Responsibilities</h3>
+        <p>You are responsible for providing the information and materials necessary to complete your website, including:</p>
+        <ul>
+          <li>Business name and contact information.</li>
+          <li>Descriptions of your products or services.</li>
+          <li>Photographs, logos, and branding materials.</li>
+          <li>Any additional content or information required for your project.</li>
+        </ul>
+        <p>You are responsible for ensuring that all information you provide is accurate and that you have the legal right or permission to use any photographs, logos, written content, or other materials supplied to us.</p>
+        <p>Delays in providing required information, materials, access, or approvals may affect the project timeline.</p>
+
+        <h3 id="t3">3. Project Timelines and Delays</h3>
+        <p>Estimated project timelines will be established in your individual project quote or agreement.</p>
+        <p>Timelines depend on receiving the necessary information, materials, and approvals from you in a timely manner.</p>
+        <p>If a project is delayed because required information or approvals are not provided, the completion date may be extended.</p>
+        <p>If a project becomes inactive due to a lack of communication or outstanding client requirements, we reserve the right to pause the project and reschedule remaining work based on our availability.</p>
+        <p>Any significant changes to the original timeline will be communicated to you.</p>
+
+        <h3 id="t4">4. Project Scope and Additional Work</h3>
+        <p>The services included in your project are limited to those described in your original written quote or agreement.</p>
+        <p>Requests for additional pages, features, functionality, design changes, or other services outside the agreed project scope may result in additional charges or changes to the project timeline.</p>
+        <p>Any additional work, pricing adjustments, or changes to the original scope must be discussed and approved in writing before the additional work begins.</p>
+        <p>We will not proceed with additional billable work without your approval.</p>
+
+        <h3 id="t5">5. Revisions and Design Approval</h3>
+        <p>The number of revisions included in your project will be specified in your individual project quote or agreement.</p>
+        <p>Additional revisions or requests beyond the included amount may incur additional charges.</p>
+        <p>You are responsible for reviewing submitted designs, content, and website functionality and communicating any requested changes before providing final approval.</p>
+        <p>Once final approval has been provided, additional changes may be treated as new work and billed accordingly.</p>
+
+        <h3 id="t6">6. Website Launch and Completion</h3>
+        <p>Your website will be prepared for launch once the agreed project requirements have been completed and the necessary approvals have been received.</p>
+        <p>The website will not be published until all outstanding project payments have been received.</p>
+        <p>Website launch does not guarantee search engine rankings, website traffic, customer inquiries, sales, or specific business results.</p>
+        <p>We will make reasonable efforts to ensure that the completed website functions as intended at the time of delivery.</p>
+
+        <h3 id="t7">7. Ownership and Intellectual Property</h3>
+        <p>Ownership, transfer of completed website materials, and any applicable usage rights will be outlined in your individual project agreement.</p>
+        <p>Unless otherwise specified in writing, Precision Web Concepts retains ownership of its pre-existing materials, reusable code, development tools, templates, methods, and proprietary resources.</p>
+        <p>Third-party software, plugins, fonts, images, stock materials, and other licensed resources remain subject to their respective owners' licensing terms.</p>
+        <p>Any transfer of ownership or website access will be subject to the terms of the individual project agreement and full payment of all outstanding balances.</p>
+
+        <h3 id="t8">8. Third-Party Services and Expenses</h3>
+        <p>Some websites require services provided by third parties, including domain registrars, hosting providers, email services, plugins, software, or other external platforms.</p>
+        <p>Unless specifically included in your written quote, third-party services, subscriptions, renewals, and associated fees are the responsibility of the client.</p>
+        <p>Precision Web Concepts is not responsible for service interruptions, pricing changes, policy changes, or technical issues caused by third-party providers.</p>
+
+        <h3 id="t9">9. Maintenance and Ongoing Support</h3>
+        <p>Website maintenance, updates, security monitoring, content changes, and ongoing technical support are not automatically included in a website design project unless specifically stated in writing.</p>
+        <p>Any ongoing maintenance or support arrangements, including their scope and pricing, will be outlined separately in your project agreement.</p>
+
+        <h3 id="t10">10. Cancellations and Refunds</h3>
+        <p>Cancellation terms, applicable refunds, and any payments owed for work already completed will be governed by the cancellation and refund terms established in your individual project agreement.</p>
+        <p>If a project is canceled after work has begun, the parties will refer to the agreed cancellation terms to determine any remaining payment obligations or applicable refunds.</p>
+
+        <h3 id="t11">11. Limitation of Liability</h3>
+        <p>Precision Web Concepts will make reasonable efforts to provide professional website design and development services.</p>
+        <p>However, we cannot guarantee uninterrupted website availability, specific search engine placement, business performance, sales, leads, or other commercial outcomes.</p>
+        <p>To the extent permitted by applicable law, Precision Web Concepts will not be responsible for indirect, incidental, or consequential losses arising from the use of a completed website or circumstances outside our reasonable control.</p>
+        <p>Nothing in these terms excludes liability that cannot legally be excluded under applicable law.</p>
+
+        <h3 id="t12">12. Changes to These Terms</h3>
+        <p>Precision Web Concepts reserves the right to update or revise these Terms of Service as its services and business operations evolve.</p>
+        <p>Updated terms will be published on our website with a revised effective date. Changes will not retroactively alter the terms of an already signed project agreement unless both parties agree in writing.</p>
+
+        <h3 id="t13">13. Governing Law</h3>
+        <p>These Terms of Service will be governed by the laws of the State of Missouri, without regard to its conflict-of-law principles, unless otherwise required by applicable law.</p>
+
+        <h3 id="t14">14. Contact Information</h3>
+        <p>For questions regarding these Terms of Service, project agreements, or our services, please contact Precision Web Concepts through the contact information provided on our website.</p>
+
+        <p>Precision Web Concepts<br>Professional Website Design &amp; Development</p>
+
+        <a class="legal-back" href="#top" data-legal-close>← Back to the site</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEGAL: PRIVACY POLICY -->
+  <section class="legal" id="privacy" hidden>
+    <div class="wrap">
+      <div class="legal-col">
+        <h2>Privacy Policy</h2>
+        <p class="legal-updated">Precision Web Concepts<br>Effective Date: November 5, 2026</p>
+        <nav class="legal-contents" aria-label="Contents">
+          <p>Contents — 12 sections</p>
+          <ol>
+          <li><a href="#p1">Information We Collect</a></li>
+          <li><a href="#p2">How We Use Your Information</a></li>
+          <li><a href="#p3">How Information Is Submitted Through Our Website</a></li>
+          <li><a href="#p4">Information Sharing and Disclosure</a></li>
+          <li><a href="#p5">Third-Party Services</a></li>
+          <li><a href="#p6">Cookies and Website Analytics</a></li>
+          <li><a href="#p7">Data Security</a></li>
+          <li><a href="#p8">Data Retention</a></li>
+          <li><a href="#p9">Your Privacy Rights</a></li>
+          <li><a href="#p10">Children's Privacy</a></li>
+          <li><a href="#p11">Changes to This Privacy Policy</a></li>
+          <li><a href="#p12">Contact Information</a></li>
+          </ol>
+        </nav>
+
+
+        <p>Precision Web Concepts ("we," "us," or "our") respects your privacy and is committed to protecting the personal information you choose to share with us. This Privacy Policy explains what information we collect, how we use it, and how it is handled when you visit our website or contact us.</p>
+
+        <h3 id="p1">1. Information We Collect</h3>
+        <p>When you contact us through our website, email, or telephone, we may receive personal information that you voluntarily provide, including:</p>
+        <ul>
+          <li>Your name.</li>
+          <li>Your business name.</li>
+          <li>Your email address.</li>
+          <li>Your telephone number.</li>
+          <li>Information about your business or website project.</li>
+          <li>Any additional information you choose to include in your communication.</li>
+        </ul>
+        <p>You are not required to provide more information than is reasonably necessary for us to respond to your inquiry.</p>
+
+        <h3 id="p2">2. How We Use Your Information</h3>
+        <p>We use the information you provide for legitimate business purposes, including:</p>
+        <ul>
+          <li>Responding to questions and inquiries.</li>
+          <li>Discussing website design and development services.</li>
+          <li>Preparing project quotes and proposals.</li>
+          <li>Communicating about active projects.</li>
+          <li>Providing requested services and customer support.</li>
+          <li>Maintaining necessary business records.</li>
+        </ul>
+        <p>We do not use your contact information to send unsolicited marketing communications.</p>
+
+        <h3 id="p3">3. How Information Is Submitted Through Our Website</h3>
+        <p>Our website contact and project brief form is designed to work through your device's default email application.</p>
+        <p>When you select the Submit option, your email application opens with the information you entered prepared in a message addressed to us.</p>
+        <p>The website does not automatically transmit the completed form to us. Information is only sent when you choose to send the email through your email application.</p>
+        <p>Your email provider may independently process or retain that information according to its own privacy policy.</p>
+
+        <h3 id="p4">4. Information Sharing and Disclosure</h3>
+        <p>We do not sell your personal information or share it with third parties for their own marketing purposes.</p>
+        <p>We may disclose information when reasonably necessary to:</p>
+        <ul>
+          <li>Operate our business and provide requested services.</li>
+          <li>Work with service providers that support our business operations.</li>
+          <li>Comply with applicable laws, legal obligations, or valid legal requests.</li>
+          <li>Protect our rights, property, business, or the safety of others.</li>
+        </ul>
+        <p>Any service providers involved in handling information on our behalf are expected to use that information only as necessary to provide their services.</p>
+
+        <h3 id="p5">5. Third-Party Services</h3>
+        <p>Our website or business operations may rely on third-party services, including website hosting providers, domain registrars, email providers, and other technical services.</p>
+        <p>These providers may process limited technical information, such as IP addresses, device information, or website usage data, depending on the services and configurations in use.</p>
+        <p>We do not control the privacy practices of independent third-party providers. Visitors should review the applicable privacy policies of those services when appropriate.</p>
+
+        <h3 id="p6">6. Cookies and Website Analytics</h3>
+        <p>Our website may use cookies or similar technologies to support basic website functionality, improve performance, or understand how visitors interact with our website.</p>
+        <p>If analytics or tracking services are implemented, they may collect information such as browser type, device information, pages visited, and general usage patterns.</p>
+        <p>You can manage or restrict cookies through your browser settings. Disabling certain cookies may affect some website functionality.</p>
+
+        <h3 id="p7">7. Data Security</h3>
+        <p>We take reasonable measures to protect information provided to us against unauthorized access, disclosure, alteration, or misuse.</p>
+        <p>However, no method of electronic communication, internet transmission, or data storage can be guaranteed to be completely secure.</p>
+        <p>We cannot guarantee the absolute security of information transmitted through email or third-party services.</p>
+
+        <h3 id="p8">8. Data Retention</h3>
+        <p>We retain personal information only for as long as reasonably necessary to respond to inquiries, provide services, maintain business records, resolve disputes, and meet applicable legal obligations.</p>
+        <p>When information is no longer needed for these purposes, we will take reasonable steps to securely dispose of it.</p>
+
+        <h3 id="p9">9. Your Privacy Rights</h3>
+        <p>Depending on your location and applicable law, you may have rights regarding your personal information, including the right to:</p>
+        <ul>
+          <li>Request access to personal information we maintain about you.</li>
+          <li>Request correction of inaccurate information.</li>
+          <li>Request deletion of personal information, subject to applicable legal exceptions.</li>
+          <li>Ask questions about how your information is collected or used.</li>
+        </ul>
+        <p>To submit a privacy-related request, contact us using the contact information provided on our website.</p>
+
+        <h3 id="p10">10. Children's Privacy</h3>
+        <p>Our website and services are intended for businesses and general audiences. We do not knowingly collect personal information directly from children under the age of 13.</p>
+        <p>If we become aware that personal information has been collected from a child without appropriate authorization, we will take reasonable steps to address the situation.</p>
+
+        <h3 id="p11">11. Changes to This Privacy Policy</h3>
+        <p>We may update this Privacy Policy from time to time to reflect changes in our business practices, website functionality, or applicable legal requirements. Any updates will be published on this page along with a revised effective date.</p>
+
+        <h3 id="p12">12. Contact Information</h3>
+        <p>If you have questions, concerns, or requests regarding this Privacy Policy or the handling of your personal information, please contact Precision Web Concepts through the contact information provided on our website.</p>
+
+        <p>Precision Web Concepts<br>Professional Website Design &amp; Development</p>
+
+        <a class="legal-back" href="#top" data-legal-close>← Back to the site</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEGAL: DISCLAIMER -->
+  <section class="legal" id="disclaimer" hidden>
+    <div class="wrap">
+      <div class="legal-col">
+        <h2>Disclaimer</h2>
+        <p class="legal-updated">Precision Web Concepts<br>Effective Date: November 5, 2026</p>
+        <nav class="legal-contents" aria-label="Contents">
+          <p>Contents — 6 sections</p>
+          <ol>
+          <li><a href="#d1">Demonstrations and Examples</a></li>
+          <li><a href="#d2">No Guaranteed Results</a></li>
+          <li><a href="#d3">Customer Reviews and Testimonials</a></li>
+          <li><a href="#d4">General Information</a></li>
+          <li><a href="#d5">Third-Party Services</a></li>
+          <li><a href="#d6">Updates to This Disclaimer</a></li>
+          </ol>
+        </nav>
+
+
+        <h3 id="d1">1. Demonstrations and Examples</h3>
+        <p>Examples and interactive demonstrations available on this website, including chat features, booking systems, quote calculators, and automated text-back features, are provided solely to demonstrate services and functionality that Precision Web Concepts may offer to businesses.</p>
+        <p>These demonstrations are for informational and testing purposes only. Interacting with these features does not create an actual appointment, reservation, purchase, payment obligation, or message to a business unless explicitly stated otherwise.</p>
+        <p>Demonstrations do not guarantee that identical features, functionality, or results will be available in every client project. Actual features and services will depend on the scope and specifications agreed upon in the individual project agreement.</p>
+
+        <h3 id="d2">2. No Guaranteed Results</h3>
+        <p>A professionally designed website can help a business establish an online presence, present its services, and make it easier for potential customers to find and contact the business.</p>
+        <p>However, Precision Web Concepts does not guarantee specific business results, including increased traffic, customer inquiries, bookings, sales, revenue, income, search engine rankings, or business growth.</p>
+        <p>Results vary depending on numerous factors, including the nature of the business, market conditions, competition, customer demand, marketing efforts, and other circumstances beyond our control.</p>
+
+        <h3 id="d3">3. Customer Reviews and Testimonials</h3>
+        <p>Reviews and testimonials displayed on this website represent the individual experiences and opinions of the respective clients.</p>
+        <p>We do not guarantee that other clients will experience the same outcomes, satisfaction levels, or results. Individual experiences may vary depending on the services provided, project requirements, and other circumstances.</p>
+
+        <h3 id="d4">4. General Information</h3>
+        <p>All information provided on this website is intended for general informational purposes regarding Precision Web Concepts, its services, and its business offerings.</p>
+        <p>Nothing on this website should be interpreted as legal, financial, tax, accounting, or other professional advice.</p>
+        <p>Visitors should consult an appropriately qualified professional for advice relating to their individual circumstances.</p>
+
+        <h3 id="d5">5. Third-Party Services</h3>
+        <p>Our services may involve third-party platforms, software, hosting providers, integrations, or other external services.</p>
+        <p>Precision Web Concepts does not own or control these third-party services and cannot guarantee their continued availability, performance, pricing, security, or functionality.</p>
+        <p>Use of third-party services may be subject to separate terms, conditions, and privacy policies established by their respective providers.</p>
+
+        <h3 id="d6">6. Updates to This Disclaimer</h3>
+        <p>Precision Web Concepts reserves the right to update or revise this Disclaimer as necessary. Any changes will be reflected on this website with an updated effective date.</p>
+
+        <p>Precision Web Concepts<br>Professional Website Design &amp; Development</p>
+
+        <a class="legal-back" href="#top" data-legal-close>← Back to the site</a>
+      </div>
     </div>
   </section>
 
@@ -1270,10 +1605,85 @@
 <footer>
   <div class="wrap foot">
     <div class="f-brand">Precision Web Concepts<span>Your Vision / Our Precision</span></div>
-    <a href="tel:+18166816767">816-681-6767</a>
+    <nav class="legal-links" aria-label="Legal">
+      <a href="#terms" data-legal-link="terms">Terms of Service</a>
+      <a href="#privacy" data-legal-link="privacy">Privacy Policy</a>
+      <a href="#disclaimer" data-legal-link="disclaimer">Disclaimer</a>
+    </nav>
+    <a href="mailto:Precisionwebandapp@gmail.com">Precisionwebandapp@gmail.com</a>
     <p class="copy">© 2026 Precision Web Concepts. New websites for small businesses &amp; entrepreneurs.</p>
   </div>
 </footer>
+
+<button type="button" class="to-top" id="toTop" aria-label="Back to top" title="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+</button>
+
+<script>
+/* Back to top: floating arrow appears after scrolling down */
+(function(){
+  var btn = document.getElementById('toTop');
+  if(!btn) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function onScroll(){
+    btn.classList.toggle('show', window.scrollY > 600 || window.pageYOffset > 600);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  btn.addEventListener('click', function(){
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  });
+})();
+</script>
+
+<script>
+/* Legal pages: footer links open one legal section at a time */
+(function(){
+  var legalIds = ['terms', 'privacy', 'disclaimer'];
+  function showLegal(id){
+    legalIds.forEach(function(x){
+      var el = document.getElementById(x);
+      if(el) el.hidden = (x !== id);
+    });
+    var target = document.getElementById(id);
+    if(target){
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var h = target.querySelector('h2');
+      if(h){ h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
+    }
+  }
+  function hideLegal(){
+    legalIds.forEach(function(x){
+      var el = document.getElementById(x);
+      if(el) el.hidden = true;
+    });
+  }
+  document.querySelectorAll('[data-legal-link]').forEach(function(link){
+    link.addEventListener('click', function(e){
+      e.preventDefault();
+      var id = link.getAttribute('data-legal-link');
+      showLegal(id);
+      if(history.replaceState) history.replaceState(null, '', '#' + id);
+    });
+  });
+  document.querySelectorAll('[data-legal-close]').forEach(function(link){
+    link.addEventListener('click', function(){
+      hideLegal();
+      if(history.replaceState) history.replaceState(null, '', location.pathname + location.search);
+    });
+  });
+  /* If the page is opened with #terms, #privacy, or #disclaimer, show that page */
+  var startHash = (location.hash || '').replace('#', '');
+  if(legalIds.indexOf(startHash) !== -1){
+    showLegal(startHash);
+  }
+  /* Keep the open document in step with the hash (back/forward, pasted links) */
+  window.addEventListener('hashchange', function(){
+    var h = (location.hash || '').replace('#', '');
+    if(legalIds.indexOf(h) !== -1) showLegal(h);
+  });
+})();
+</script>
 
 <script>
 (function(){
@@ -1281,7 +1691,7 @@
   var notesEl = document.getElementById('bizNotes');
   var out = document.getElementById('briefOut');
   var copiedMsg = document.getElementById('copiedMsg');
-  var state = { type: '', goal: '' };
+  var state = { type: '', goals: [] };
 
   function pillGroup(id, key){
     var group = document.getElementById(id);
@@ -1296,7 +1706,19 @@
     });
   }
   pillGroup('typePills', 'type');
-  pillGroup('goalPills', 'goal');
+
+  /* Why do you want a website? — checkboxes, more than one can be ticked */
+  var goalChecks = document.getElementById('goalChecks');
+  function syncGoals(){
+    state.goals = [];
+    goalChecks.querySelectorAll('input[type="checkbox"][name="siteReason"]').forEach(function(cb){
+      if(cb.checked) state.goals.push(cb.value);
+    });
+  }
+  goalChecks.addEventListener('change', function(){
+    syncGoals();
+    render();
+  });
 
   /* --- Photos of your work: one description box per photo --- */
   var photoList = document.getElementById('photoList');
@@ -1306,7 +1728,7 @@
       var n = i + 1;
       row.querySelector('.photo-row-head strong').textContent = 'Photo ' + n;
       var ta = row.querySelector('textarea');
-      ta.setAttribute('aria-label', 'Short description for photo ' + n + ' — what it shows and what work you did in it');
+      ta.setAttribute('aria-label', 'Short description for photo ' + n + ' — the photo you will attach to your email with this number, and what it shows');
       ta.dataset.photoNumber = n;
     });
   }
@@ -1337,7 +1759,7 @@
 
     var need = document.createElement('span');
     need.className = 'photo-need';
-    need.textContent = 'Every photo needs its own description — what it shows, and what work you did in it.';
+    need.textContent = 'Description only — do not try to add the photo here. Attach the photo itself to the email when you tap Submit, labelled to match this number.';
 
     row.appendChild(head);
     row.appendChild(ta);
@@ -1371,21 +1793,21 @@
     lines.push('');
     lines.push('Business: ' + (nameEl.value.trim() || '(not filled in yet)'));
     if(state.type) lines.push('Type of business: ' + state.type);
-    if(state.goal) lines.push('Main goal for the site: ' + state.goal);
+    if(state.goals && state.goals.length) lines.push('Why I want a website: ' + state.goals.join(', '));
     if(notesEl.value.trim()){ lines.push(''); lines.push('Notes: ' + notesEl.value.trim()); }
     var photos = photoDescriptions();
     if(photos.length){
       lines.push('');
-      lines.push('Photos of my work — I\'ll send the photos with this email, labelled Photo 1, Photo 2, and so on to match. Each description below goes with the photo of the same number:');
+      lines.push('Photos of my work — I will attach the photos to this email, labelled Photo 1, Photo 2, and so on to match. Each description below goes with the photo of the same number:');
       photos.forEach(function(d){ lines.push('Photo ' + d.n + ': ' + d.text); });
     }
     return lines.join('\n');
   }
 
   function render(){
-    var empty = !nameEl.value.trim() && !state.type && !state.goal && !notesEl.value.trim() && !photoDescriptions().length;
+    var empty = !nameEl.value.trim() && !state.type && !(state.goals && state.goals.length) && !notesEl.value.trim() && !photoDescriptions().length;
     if(empty){
-      out.textContent = 'Start typing on the left and your brief will appear here — ready to submit, or call 816-681-6767.';
+      out.textContent = 'Start typing on the left and your brief will appear here — ready to submit by email, or email Precisionwebandapp@gmail.com to get started.';
     } else {
       out.textContent = briefText();
     }
@@ -1400,20 +1822,10 @@
     copiedMsg.textContent = 'Opening your email app…';
     var a = document.createElement('a'); a.href = href; document.body.appendChild(a); a.click(); document.body.removeChild(a);
   });
-  var copyNumBtn = document.getElementById('copyNumberBtn');
-  var copyNumMsg = document.getElementById('copyNumberMsg');
-  if(copyNumBtn){
-    copyNumBtn.addEventListener('click', function(){
-      function done(){ copyNumMsg.textContent = 'Copied — paste it in your Phone app.'; setTimeout(function(){ copyNumMsg.textContent=''; }, 3500); }
-      if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText('816-681-6767').then(done).catch(function(){ copyNumMsg.textContent='Number: 816-681-6767'; }); }
-      else { copyNumMsg.textContent='Number: 816-681-6767'; }
-    });
-  }
-
   document.getElementById('copyBtn').addEventListener('click', function(){
     var text = briefText();
     function done(){
-      copiedMsg.textContent = 'Copied — see you on the call.';
+      copiedMsg.textContent = 'Copied — paste it in your email to Precisionwebandapp@gmail.com.';
       setTimeout(function(){ copiedMsg.textContent = ''; }, 3500);
     }
     if(navigator.clipboard && navigator.clipboard.writeText){
@@ -1830,13 +2242,13 @@
   }
   function botAnswer(q){
     var s = (q||'').toLowerCase();
-    if(s.indexOf('cost')>-1 || s.indexOf('price')>-1 || s.indexOf('much')>-1 || s==='cost') return 'Pricing varies depending on what you want — pages, features, and content. Every project is quoted up front before work begins, and half of the quote is required up front to start. For your quote, call 816-681-6767.';
+    if(s.indexOf('cost')>-1 || s.indexOf('price')>-1 || s.indexOf('much')>-1 || s==='cost') return 'Pricing varies depending on what you want — pages, features, and content. Every project is quoted up front before work begins, and half of the quote is required up front to start. For your quote, email Precisionwebandapp@gmail.com or fill out the brief form below — or call if you prefer.';
     if(s.indexOf('service')>-1 || s.indexOf('build')>-1 || s==='services') return 'Precision builds brand-new websites for small businesses and entrepreneurs. Add-ons include branding & logo creation, AI chat support, testimonials sections, and legal documents — plus more on request.';
-    if(s.indexOf('start')>-1 || s.indexOf('begin')>-1 || s==='start') return 'It starts with one call: 816-681-6767. Or use the brief builder below and submit it — it opens in your email to Precisionwebandapp@gmail.com. You can also just tell us your business name and what you want the site to do.';
-    if(s.indexOf('phone')>-1 || s.indexOf('call')>-1 || s.indexOf('contact')>-1) return 'Call 816-681-6767, or email Precisionwebandapp@gmail.com. Tap-to-call buttons are all over this page.';
-    if(s.indexOf('book')>-1) return 'Try the Book a Call tile next to this one — pick a day and time to see how booking feels. To talk to Precision for real, call 816-681-6767.';
-    if(s.indexOf('time')>-1 || s.indexOf('long')>-1) return 'Timelines depend on your project — pages, features, and how much content you already have. Call 816-681-6767 and talk through your project for a straight answer.';
-    return 'Good question — I can answer about services, pricing, booking, and how to get started. For anything else, call 816-681-6767 or email Precisionwebandapp@gmail.com.';
+    if(s.indexOf('start')>-1 || s.indexOf('begin')>-1 || s==='start') return 'It starts with the brief builder below — submit it and it opens in your email to Precisionwebandapp@gmail.com. Or just email us your business name and what you want the site to do. You can call if you prefer.';
+    if(s.indexOf('phone')>-1 || s.indexOf('call')>-1 || s.indexOf('contact')>-1) return 'Email Precisionwebandapp@gmail.com first, or use the brief form below. If you prefer to talk, you can call — the number is in the header at the top and in the contact section at the bottom of this page.';
+    if(s.indexOf('book')>-1) return 'Try the Book a Call tile next to this one — pick a day and time to see how booking feels. To start with Precision for real, email Precisionwebandapp@gmail.com or fill out the brief form below.';
+    if(s.indexOf('time')>-1 || s.indexOf('long')>-1) return 'Timelines depend on your project — pages, features, and how much content you already have. Email Precisionwebandapp@gmail.com or fill out the brief form to talk through your project for a straight answer — or call if you prefer.';
+    return 'Good question — I can answer about services, pricing, booking, and how to get started. For anything else, email Precisionwebandapp@gmail.com or fill out the brief form below — or call if you prefer.';
   }
   document.querySelectorAll('[data-q]').forEach(function(b){
     b.addEventListener('click', function(){
@@ -1885,7 +2297,7 @@
   if(bookBtn){ bookBtn.addEventListener('click', function(){
     var d = daySel.get(), t = timeSel.get(), n = bookName.value.trim();
     if(!d || !t){ bookResult.innerHTML = '<strong>Almost there —</strong> pick both a day and a time above to see the confirmation.'; return; }
-    bookResult.innerHTML = '<strong>All set' + (n ? ', ' + n.replace(/</g,'') : '') + '!</strong><br />' + d + ' at ' + t + ' — that\'s how a booking confirmation looks on a site like this. To book with Precision for real, call 816-681-6767.';
+    bookResult.innerHTML = '<strong>All set' + (n ? ', ' + n.replace(/</g,'') : '') + '!</strong><br />' + d + ' at ' + t + ' — that\'s how a booking confirmation looks on a site like this. To start with Precision for real, email Precisionwebandapp@gmail.com or use the brief form below.';
   }); }
 
   /* --- Service picker demo --- */
