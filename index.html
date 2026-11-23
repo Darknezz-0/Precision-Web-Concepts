@@ -4,6 +4,16 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="color-scheme" content="dark" />
+<script>
+/* Apply the visitor's saved look before anything paints, so the page
+   opens in the look they chose last time — no flash of the other look. */
+try{
+  var savedLook = localStorage.getItem('pwc-look');
+  if(savedLook === 'onyx' || savedLook === 'calm'){
+    document.documentElement.classList.add('look-onyx');
+  }
+}catch(e){}
+</script>
 <meta name="description" content="Precision Web Concepts builds brand-new websites for small businesses and entrepreneurs. Your Vision / Our Precision. Email Precisionwebconcepts@gmail.com to get started." />
 <link rel="icon" href="data:," />
 <title>Precision Web Concepts — New Websites for Small Businesses</title>
@@ -12,19 +22,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
   :root{
-    --bg:#05060f;
-    --bg-2:#090a1a;
-    --panel:#0d0f22;
-    --panel-2:#12142c;
-    --line:rgba(139,148,255,.22);
-    --line-strong:rgba(0,207,255,.35);
-    --ink:#f2f3ff;
-    --muted:#b7bad6;
-    --muted-2:#8f93b3;
+    --bg:#040213;
+    --bg-2:#0a0619;
+    --panel:#120b2b;
+    --panel-2:#1c113f;
+    --line:rgba(168,85,247,.38);
+    --line-strong:rgba(233,63,216,.52);
+    --ink:#f5f3ff;
+    --muted:#c3bce0;
+    --muted-2:#9d94c4;
     --violet:#a855f7;
-    --magenta:#e93fd8;
-    --blue:#00cfff;
-    --blue-2:#3b82f6;
+    --magenta:#ee3fd8;
+    --blue:#8f8dff;
+    --blue-2:#6366f1;
     --radius:18px;
   }
   *{box-sizing:border-box}
@@ -78,6 +88,18 @@
   .nav .btn{margin-left:6px}
   @media (max-width:860px){ .nav-links{display:none} .nav .btn{margin-left:auto} }
   @media (max-width:480px){ .brand-name{font-size:14.5px} .nav .btn{padding:9px 14px; font-size:13.5px} }
+
+  /* ---------- Switch Look (alternate onyx black & hellfire red look) ---------- */
+  .look-switch{display:flex; flex-direction:column; gap:4px; flex:none}
+  .nav .look-switch .btn{margin-left:0; align-self:flex-start}
+  .look-switch-note{font-size:11.5px; line-height:1.35; font-weight:600; color:var(--muted-2); max-width:172px}
+  @media (max-width:1100px){ .nav-in{gap:14px} .nav-links{gap:16px} .look-switch-note{max-width:146px} }
+  @media (max-width:980px){ .nav-in{flex-wrap:wrap} }
+  @media (max-width:860px){ .look-switch{margin-left:auto} .nav .look-switch .btn{margin-left:0} }
+  @media (max-width:640px){
+    .look-switch{order:3; flex-basis:100%; margin-left:0}
+    .look-switch-note{max-width:34em}
+  }
 
   /* ---------- Hero ---------- */
   .hero{
@@ -147,7 +169,7 @@
   .hero h1 em{font-style:normal; color:var(--blue)}
   .hero h1 .v{color:var(--magenta)}
   .hero-sub{font-size:19px; color:var(--muted); max-width:34em}
-  .hero-sub strong{color:var(--ink)}
+  .hero-sub strong{color:var(--magenta)}
   .hero-ctas{display:flex; flex-wrap:wrap; gap:13px; margin-top:30px}
   .hero-points{display:flex; flex-wrap:wrap; gap:10px 22px; margin-top:26px; color:var(--muted); font-size:15px; font-weight:600}
   .hero-points span{display:inline-flex; align-items:center; gap:8px}
@@ -179,6 +201,7 @@
   .kicker{font-family:"Sora",sans-serif; font-size:12px; font-weight:700; letter-spacing:.24em; text-transform:uppercase; color:var(--magenta); margin-bottom:13px}
   .sec-head h2{font-size:clamp(28px, 3.6vw, 40px); font-weight:800}
   .sec-head p{color:var(--muted); margin-top:13px; font-size:17.5px}
+  .sec-head p strong{color:var(--magenta)}
 
   /* Focus banner */
   .focus{
@@ -288,13 +311,13 @@
     background:var(--bg); border:1px dashed var(--line-strong); border-radius:12px; padding:18px;
     font-size:15.5px; color:var(--muted); white-space:pre-wrap; min-height:190px;
   }
-  .brief-out strong{color:var(--ink)}
+  .brief-out strong{color:var(--magenta)}
   .brief-actions{display:flex; flex-wrap:wrap; gap:11px; margin-top:18px}
   .copied{font-size:14px; color:var(--blue); font-weight:700; align-self:center; min-height:1em}
 
   /* Photos of your work — one description box per photo */
   .photo-help{color:var(--muted); font-size:14.5px; margin:-2px 0 13px}
-  .photo-help strong{color:var(--ink)}
+  .photo-help strong{color:var(--magenta)}
   .photo-row{border:1px solid var(--line); border-radius:12px; padding:14px; margin-bottom:12px; background:rgba(0,207,255,.03)}
   .photo-row-head{display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:9px}
   .photo-row-head strong{font-family:"Sora",sans-serif; font-size:14px}
@@ -384,7 +407,9 @@
     background:linear-gradient(160deg, rgba(18,20,44,.96), rgba(9,10,26,.96));
     border:1px solid var(--line-strong); color:var(--blue);
     box-shadow:0 10px 30px rgba(0,0,0,.5), 0 0 18px rgba(0,207,255,.22);
-    opacity:0; visibility:hidden; transform:translateY(12px);
+    /* always visible and tappable — including on phones at the top of
+       the page, where a scroll-revealed button can't be reached */
+    opacity:1; visibility:visible; transform:translateY(0);
     transition:opacity .25s ease, transform .25s ease, visibility .25s ease, border-color .2s ease;
   }
   .to-top svg{width:22px; height:22px; stroke:var(--blue)}
@@ -475,8 +500,6 @@
     animation:holoFloat 3.4s ease-in-out infinite, demoPulse 1.7s ease-in-out infinite !important;
   }
   @keyframes demoPulse{0%,100%{box-shadow:0 0 0 0 rgba(0,207,255,.55), 0 0 28px rgba(0,207,255,.55)} 50%{box-shadow:0 0 0 12px rgba(0,207,255,0), 0 0 48px rgba(233,63,216,.75)}}
-  .holo-hint{width:100%; margin-top:2px; font-size:14px; font-weight:700; color:var(--blue); letter-spacing:.02em; animation:hintBlink 2.2s ease-in-out infinite}
-  @keyframes hintBlink{0%,100%{opacity:.65} 50%{opacity:1; text-shadow:0 0 14px rgba(0,207,255,.8)}}
   .holo-orbs{position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0}
   /* glowing circuit nodes — a bright core with concentric via rings, like
      solder points on a board, instead of plain glowing blobs */
@@ -637,7 +660,7 @@
   /* Booking + picker */
   .slot-grid{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 14px} .slot{font:inherit;font-size:14px;font-weight:700;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--muted);cursor:pointer} .slot[aria-pressed="true"]{color:#fff;background:linear-gradient(100deg,var(--violet),var(--magenta));border-color:transparent}
   .demo-input{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:10px;color:var(--ink);font:inherit;font-size:15px;padding:11px 12px;margin-bottom:10px}
-  .demo-result{margin-top:12px;border:1px dashed var(--line-strong);border-radius:12px;padding:13px 14px;color:var(--muted);font-size:14.5px;background:rgba(0,207,255,.05)} .demo-result strong{color:var(--ink)}
+  .demo-result{margin-top:12px;border:1px dashed var(--line-strong);border-radius:12px;padding:13px 14px;color:var(--muted);font-size:14.5px;background:rgba(0,207,255,.05)} .demo-result strong{color:var(--magenta)}
   .picker-row{display:flex;justify-content:space-between;gap:12px;align-items:center;width:100%;text-align:left;font:inherit;padding:12px 13px;margin-bottom:8px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer} .picker-row small{display:block;color:var(--muted);font-size:13px;margin-top:2px} .picker-row .price{font-family:"Sora",sans-serif;font-weight:800;color:var(--blue);white-space:nowrap} .picker-row[aria-pressed="true"]{border-color:var(--blue);background:rgba(0,207,255,.10);box-shadow:0 0 16px rgba(0,207,255,.14)}
   .picker-total{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-family:"Sora",sans-serif;font-weight:800} .picker-total span:last-child{font-size:22px;color:var(--blue)}
   .copy-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;margin-top:16px}
@@ -691,6 +714,365 @@
   @keyframes holoDissolve{0%{opacity:1;visibility:visible;filter:brightness(1.6)}40%{opacity:1;visibility:visible;filter:brightness(2.6)}62%{opacity:0;visibility:hidden}100%{opacity:0;visibility:hidden}}
   @keyframes holoReform{0%{opacity:0;visibility:visible;transform:scale(.97);filter:brightness(2.3)}55%{opacity:1}100%{opacity:1;transform:scale(1);filter:brightness(1)}}
   @media (prefers-reduced-motion: reduce){.tile,.smoke span,.mini-tile{animation:none !important}}
+
+  /* ---------- Alternate look: Onyx Black & Hellfire Red ----------
+     Toggled by the "Switch Look" button in the header (html.look-onyx).
+     Same layout, same content — but deep onyx black surfaces, solid
+     hellfire red accents and high-contrast off-white text. No neon
+     glow, no flashing, nothing moves: every animation is off, the
+     animated canvas backdrop is hidden, and the microchip / circuit
+     pattern stays on as a faint, still etching. */
+  html.look-onyx{
+    color-scheme:dark;
+    --bg:#070708;
+    --bg-2:#0d0d0f;
+    --panel:#121214;
+    --panel-2:#1a1a1d;
+    --line:rgba(240,235,230,.14);
+    --line-strong:rgba(232,49,15,.55);
+    --ink:#f5f1ea;
+    --muted:#cfc9c0;
+    --muted-2:#9d968c;
+    --violet:#b91f05;
+    --magenta:#e8310f;
+    --blue:#ff5a36;
+    --blue-2:#7a1302;
+  }
+  html.look-onyx *, html.look-onyx *::before, html.look-onyx *::after{animation:none !important}
+  html.look-onyx .rv-init{opacity:1; transform:none; filter:none}
+  html.look-onyx #holo-bg{display:none}
+  html.look-onyx .nav{background:rgba(7,7,8,.94)}
+  html.look-onyx .brand-name span{color:var(--blue)}
+
+  /* hero: deep onyx + faint still hellfire-red circuit etching, no glow or motion */
+  html.look-onyx .hero{
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%23e8310f' stroke-opacity='.12' stroke-width='1.5'%3E%3Cpath d='M0 55 H70 L95 80 H220'/%3E%3Cpath d='M40 220 V130 L65 105 V0'/%3E%3Cpath d='M220 165 H150 L125 140 H0'/%3E%3Cpath d='M175 220 V95 L150 70'/%3E%3C/g%3E%3Cg fill='%23e8310f' fill-opacity='.25'%3E%3Ccircle cx='70' cy='55' r='3'/%3E%3Ccircle cx='150' cy='165' r='3'/%3E%3Ccircle cx='65' cy='105' r='3'/%3E%3C/g%3E%3Cg fill='none' stroke='%23e8310f' stroke-opacity='.16'%3E%3Crect x='168' y='168' width='34' height='34' rx='4'/%3E%3Crect x='179' y='179' width='12' height='12'/%3E%3C/g%3E%3C/svg%3E"),
+      linear-gradient(180deg, var(--bg-2), var(--bg));
+    background-size:220px 220px, auto;
+  }
+  html.look-onyx .smoke, html.look-onyx .holo-orbs, html.look-onyx .hero-scanbar, html.look-onyx .binary-col{display:none !important}
+  html.look-onyx .hero-grid{opacity:.4}
+  html.look-onyx .hero-grid .pulse{display:none}
+  html.look-onyx .hero-grid .trace{stroke:rgba(232,49,15,.30)}
+  html.look-onyx .hero-grid .trace.v{stroke:rgba(232,49,15,.22)}
+  html.look-onyx .hero-grid .node{fill:#0d0d0f; stroke:#e8310f}
+  html.look-onyx .hero-grid .node.m{stroke:#e8310f}
+  html.look-onyx .hero-grid .node.f{fill:#e8310f}
+  html.look-onyx .hero-grid .node.m.f{fill:#e8310f}
+  html.look-onyx .chip{opacity:.35}
+  html.look-onyx .chip .body{fill:#121214}
+  html.look-onyx .tagline{background:var(--panel)}
+  html.look-onyx .tagline i{box-shadow:none}
+  html.look-onyx .tick{background:rgba(232,49,15,.12)}
+  html.look-onyx .logo-frame::before{display:none}
+  html.look-onyx .logo-card{box-shadow:0 12px 32px rgba(0,0,0,.55)}
+  html.look-onyx .logo-card::after{display:none}
+  html.look-onyx .mini-tile{background:var(--panel); box-shadow:none}
+
+  /* solid buttons — no glow, no scanlines, no light sweep, no brackets */
+  html.look-onyx .btn{box-shadow:none; text-shadow:none; backdrop-filter:none; -webkit-backdrop-filter:none}
+  html.look-onyx .btn::before, html.look-onyx .btn::after{display:none}
+  html.look-onyx .holo-corner{display:none}
+  html.look-onyx .btn-call{background:var(--magenta); border-color:var(--magenta); color:#ffffff}
+  html.look-onyx .btn-call:hover{background:#c22408; box-shadow:none}
+  html.look-onyx .btn-ghost{background:transparent; border:2px solid var(--magenta); color:var(--ink)}
+  html.look-onyx .btn-ghost:hover{border-color:var(--blue); color:var(--blue); box-shadow:none}
+  html.look-onyx .btn:hover{box-shadow:none}
+  html.look-onyx .nav-links a::after{box-shadow:none}
+
+  /* sections & surfaces */
+  html.look-onyx .showcase, html.look-onyx .includes, html.look-onyx .process{
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%23e8310f' stroke-opacity='.10' stroke-width='1.5'%3E%3Cpath d='M0 55 H70 L95 80 H220'/%3E%3Cpath d='M40 220 V130 L65 105 V0'/%3E%3Cpath d='M220 165 H150 L125 140 H0'/%3E%3Cpath d='M175 220 V95 L150 70'/%3E%3C/g%3E%3Cg fill='%23e8310f' fill-opacity='.20'%3E%3Ccircle cx='70' cy='55' r='3'/%3E%3Ccircle cx='150' cy='165' r='3'/%3E%3Ccircle cx='65' cy='105' r='3'/%3E%3C/g%3E%3Cg fill='none' stroke='%23e8310f' stroke-opacity='.13'%3E%3Crect x='168' y='168' width='34' height='34' rx='4'/%3E%3Crect x='179' y='179' width='12' height='12'/%3E%3C/g%3E%3C/svg%3E"),
+      var(--bg-2);
+    background-size:220px 220px, auto;
+  }
+  html.look-onyx .contact{
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%23e8310f' stroke-opacity='.10' stroke-width='1.5'%3E%3Cpath d='M0 55 H70 L95 80 H220'/%3E%3Cpath d='M40 220 V130 L65 105 V0'/%3E%3Cpath d='M220 165 H150 L125 140 H0'/%3E%3C/g%3E%3Cg fill='%23e8310f' fill-opacity='.20'%3E%3Ccircle cx='70' cy='55' r='3'/%3E%3Ccircle cx='150' cy='165' r='3'/%3E%3C/g%3E%3Cg fill='none' stroke='%23e8310f' stroke-opacity='.13'%3E%3Crect x='168' y='168' width='34' height='34' rx='4'/%3E%3Crect x='179' y='179' width='12' height='12'/%3E%3C/g%3E%3C/svg%3E"),
+      linear-gradient(180deg, var(--bg-2), var(--bg));
+    background-size:220px 220px, auto;
+  }
+  html.look-onyx .card, html.look-onyx .who, html.look-onyx .step, html.look-onyx .panel, html.look-onyx details{
+    box-shadow:0 1px 4px rgba(0,0,0,.4);
+  }
+  html.look-onyx .card::after, html.look-onyx .who::after, html.look-onyx .step::after{display:none}
+  html.look-onyx .card:hover, html.look-onyx .who:hover, html.look-onyx .step:hover{border-color:var(--blue); box-shadow:0 1px 4px rgba(0,0,0,.4)}
+  html.look-onyx .focus{background:linear-gradient(120deg, rgba(232,49,15,.13), rgba(232,49,15,.05))}
+  html.look-onyx .tile{background:var(--panel); border-color:var(--line-strong); box-shadow:0 2px 12px rgba(0,0,0,.45)}
+  html.look-onyx .tile::before{opacity:.25}
+  html.look-onyx .tile-icon{background:rgba(232,49,15,.10)}
+  html.look-onyx .demo-badge{background:rgba(232,49,15,.18); color:var(--ink); border-color:rgba(232,49,15,.6)}
+  html.look-onyx .demo-badge.blue{background:rgba(232,49,15,.10)}
+  html.look-onyx .showcase-note{background:var(--panel)}
+  html.look-onyx .chat-box{background:#0a0a0b}
+  html.look-onyx .msg.bot{background:var(--panel-2); color:var(--ink)}
+  html.look-onyx .msg.user{background:var(--magenta)}
+  html.look-onyx .quick-q button{background:rgba(232,49,15,.08)}
+  html.look-onyx .photo-row{background:rgba(232,49,15,.04)}
+  html.look-onyx .brief-out{background:#0a0a0b}
+  html.look-onyx .demo-result, html.look-onyx .quote-range{background:rgba(232,49,15,.05)}
+  html.look-onyx .review-card, html.look-onyx .review-empty{background:rgba(232,49,15,.04)}
+  html.look-onyx .missed-banner{background:rgba(232,49,15,.08); border-color:rgba(232,49,15,.4)}
+  html.look-onyx .missed-banner .mc-icon{background:rgba(232,49,15,.14); border-color:rgba(232,49,15,.45)}
+
+  /* form controls in the onyx look */
+  html.look-onyx .pill[aria-pressed="true"]{background:var(--magenta); box-shadow:none}
+  html.look-onyx .slot[aria-pressed="true"]{background:var(--magenta)}
+  html.look-onyx .picker-row[aria-pressed="true"]{background:rgba(232,49,15,.10); box-shadow:none}
+  html.look-onyx .quote-addon[aria-pressed="true"]{background:rgba(232,49,15,.12)}
+  html.look-onyx .check-option:has(input:checked){background:rgba(232,49,15,.10)}
+  html.look-onyx .check-option input[type="checkbox"]{accent-color:#e8310f}
+  html.look-onyx .field input:focus, html.look-onyx .field textarea:focus, html.look-onyx .field select:focus{
+    border-color:var(--blue); box-shadow:0 0 0 3px rgba(232,49,15,.22);
+  }
+  html.look-onyx .inc .n{background:rgba(232,49,15,.07)}
+  html.look-onyx .to-top{background:var(--panel); box-shadow:0 4px 16px rgba(0,0,0,.5)}
+  html.look-onyx .big-number:hover{color:var(--blue)}
+
+  /* ---------- Switch Look button: matches the look it sits on ----------
+     On the dark neon site it wears the site's pink/purple neon style;
+     on the onyx site it switches to solid hellfire red. No float, flicker
+     or scanline overlay on this one: it stays still and readable so
+     visitors spot it first. */
+  #lookSwitch.btn{
+    animation:none !important; text-shadow:none;
+    background:linear-gradient(100deg, var(--violet), var(--magenta) 55%, var(--blue-2));
+    color:#fff; border:1px solid rgba(0,207,255,.55);
+    font-size:15.5px; padding:12px 20px;
+    box-shadow:0 8px 28px rgba(168,85,247,.35);
+  }
+  #lookSwitch.btn::before{display:none}
+  #lookSwitch.btn:hover{background:linear-gradient(100deg, var(--violet), var(--magenta) 55%, var(--blue-2)); color:#fff; box-shadow:0 10px 34px rgba(0,207,255,.35)}
+  html.look-onyx #lookSwitch.btn{background:#e8310f; color:#f5f1ea; border-color:#e8310f; box-shadow:none}
+  html.look-onyx #lookSwitch.btn:hover{background:#c22408; color:#f5f1ea}
+  .look-switch{gap:6px}
+  .look-switch-note{font-size:12.5px; font-weight:700; color:var(--muted); max-width:216px}
+  @media (max-width:640px){ .look-switch-note{max-width:100%} }
+
+  /* ---------- Reviews: full-width cards, nothing outside the box ---------- */
+  .reviews-list{display:grid; gap:18px; margin-bottom:22px}
+  .review-card{padding:28px 30px; border-radius:var(--radius)}
+  @media (max-width:560px){ .review-card{padding:22px} }
+  .review-card blockquote{font-size:17.5px}
+  .review-card + .review-card{margin-top:0}
+  .review-cta{text-align:center}
+  footer .foot > a{overflow-wrap:anywhere; min-width:0}
+
+  /* ================================================================
+     DASHBOARD RESTYLE — purple / pink neon dashboard look
+     Deep purple-black background, thin bright purple-to-pink borders,
+     glowing dashboard panels, crown-emblem header, and the
+     Ideas → Design → Development → Results stepper, applied to
+     the existing public content and structure.
+     Neon-only glow rules are guarded with html:not(.look-onyx) so
+     the Onyx Black & Hellfire Red look stays flat and solid.
+     ================================================================ */
+
+  /* Header as a dashboard top bar, crown logo framed like an emblem */
+  .brand-mark{width:46px; height:46px; border-radius:13px}
+  html:not(.look-onyx) .nav{
+    background:rgba(4,2,16,.92);
+    border-bottom:1px solid rgba(233,63,216,.40);
+    box-shadow:0 1px 0 rgba(168,85,247,.35), 0 12px 34px rgba(168,85,247,.14);
+  }
+  html:not(.look-onyx) .brand-mark{
+    border:1.5px solid rgba(233,63,216,.70);
+    box-shadow:0 0 16px rgba(168,85,247,.55), 0 0 30px rgba(233,63,216,.28);
+  }
+  .brand-name span{color:var(--magenta)}
+  html.look-onyx .brand-name span{color:var(--blue)}
+
+  /* Section kickers become small dashboard label chips */
+  .kicker{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:7px 13px; border:1px solid var(--line); border-radius:999px;
+    background:rgba(168,85,247,.10);
+  }
+  .kicker::before{content:""; width:7px; height:7px; border-radius:50%; background:var(--magenta); flex:none}
+  html:not(.look-onyx) .kicker{box-shadow:0 0 14px rgba(168,85,247,.18) inset, 0 0 12px rgba(233,63,216,.12)}
+  html:not(.look-onyx) .kicker::before{box-shadow:0 0 9px var(--magenta)}
+  html.look-onyx .kicker{background:var(--panel); box-shadow:none}
+  html.look-onyx .kicker::before{box-shadow:none}
+
+  /* Dashboard panels: bright thin gradient border, deep purple fill,
+     a pink top light-line and a soft outer glow */
+  html:not(.look-onyx) .card,
+  html:not(.look-onyx) .who,
+  html:not(.look-onyx) .step,
+  html:not(.look-onyx) .panel,
+  html:not(.look-onyx) details,
+  html:not(.look-onyx) .review-card,
+  html:not(.look-onyx) .review-empty{
+    background:
+      linear-gradient(90deg, transparent, rgba(233,63,216,.55), rgba(168,85,247,.55), transparent) top / 100% 2px no-repeat,
+      linear-gradient(165deg, rgba(168,85,247,.17), rgba(19,11,43,.97) 44%, rgba(233,63,216,.08));
+    border-color:rgba(196,141,255,.50);
+    box-shadow:0 0 0 1px rgba(233,63,216,.10) inset, 0 0 26px rgba(168,85,247,.15), 0 20px 44px rgba(0,0,0,.42);
+  }
+  html:not(.look-onyx) .focus{
+    background:
+      linear-gradient(90deg, transparent, rgba(233,63,216,.55), rgba(168,85,247,.55), transparent) top / 100% 2px no-repeat,
+      linear-gradient(120deg, rgba(168,85,247,.20), rgba(233,63,216,.10));
+    border-color:rgba(196,141,255,.50);
+    box-shadow:0 0 26px rgba(168,85,247,.16), 0 18px 40px rgba(0,0,0,.40);
+  }
+  html:not(.look-onyx) .tile{
+    background:
+      linear-gradient(90deg, transparent, rgba(233,63,216,.60), rgba(168,85,247,.60), transparent) top / 100% 2px no-repeat,
+      linear-gradient(165deg, rgba(88,28,135,.38), rgba(10,5,26,.98) 46%, rgba(233,63,216,.09));
+    border-color:rgba(217,70,239,.55);
+    box-shadow:0 18px 50px rgba(0,0,0,.48), 0 0 0 1px rgba(168,85,247,.14) inset, 0 0 36px rgba(168,85,247,.20);
+  }
+  html:not(.look-onyx) .card:hover, html:not(.look-onyx) .who:hover, html:not(.look-onyx) .step:hover{
+    border-color:rgba(240,171,252,.75);
+    box-shadow:0 0 0 1px rgba(233,63,216,.22) inset, 0 0 34px rgba(233,63,216,.28), 0 20px 44px rgba(0,0,0,.42);
+  }
+  /* sheen sweep recoloured to purple / pink */
+  .card::after,.who::after,.step::after{
+    background:linear-gradient(115deg, transparent 30%, rgba(168,85,247,.26) 50%, rgba(233,63,216,.18) 54%, transparent 70%);
+    background-size:250% 100%; background-position:130% 0;
+  }
+
+  /* Stat-card style icon medallions, like the dashboard's stat icons */
+  .card .ic{border-radius:50%}
+  html:not(.look-onyx) .card .ic, html:not(.look-onyx) .tile-icon{
+    background:radial-gradient(circle at 32% 28%, rgba(233,63,216,.38), rgba(168,85,247,.14));
+    border-color:rgba(233,63,216,.60);
+    box-shadow:0 0 16px rgba(168,85,247,.35), 0 0 6px rgba(233,63,216,.30) inset;
+  }
+  html:not(.look-onyx) .inc .n{
+    background:radial-gradient(circle at 32% 28%, rgba(233,63,216,.30), rgba(168,85,247,.10));
+    border-color:rgba(233,63,216,.55); color:#f0abfc;
+  }
+  @keyframes nGlow{0%,100%{box-shadow:0 0 6px rgba(168,85,247,.18)} 50%{box-shadow:0 0 17px rgba(233,63,216,.50)}}
+  @keyframes focusGlow{0%,100%{box-shadow:0 0 0 rgba(233,63,216,0)} 50%{box-shadow:0 0 28px rgba(233,63,216,.22)}}
+
+  /* Hero: deep nebula dashboard backdrop, purple / pink traces */
+  html:not(.look-onyx) .hero{
+    background:
+      radial-gradient(680px 420px at 88% -60px, rgba(233,63,216,.23), transparent 65%),
+      radial-gradient(760px 480px at -80px 30%, rgba(168,85,247,.27), transparent 65%),
+      radial-gradient(540px 360px at 55% 112%, rgba(99,102,241,.17), transparent 65%),
+      linear-gradient(180deg, var(--bg-2), var(--bg));
+  }
+  html:not(.look-onyx) .hero-grid .trace{stroke:rgba(168,85,247,.30)}
+  html:not(.look-onyx) .hero-grid .trace.v{stroke:rgba(233,63,216,.27)}
+  html:not(.look-onyx) .hero-grid .pulse{stroke:#c084fc}
+  html:not(.look-onyx) .hero-grid .pulse.v{stroke:var(--magenta)}
+  html:not(.look-onyx) .hero-grid .pulse.s{stroke:#f0abfc}
+  html:not(.look-onyx) .hero-grid .node{stroke:#c084fc}
+  html:not(.look-onyx) .hero-grid .node.f{fill:#c084fc}
+  .binary-col.b1{color:rgba(168,85,247,.20)}
+  .binary-col.b2{color:rgba(233,63,216,.18)}
+  .smoke .s2{background:radial-gradient(circle, rgba(129,140,248,.30), transparent 65%)}
+  html:not(.look-onyx) .tagline{background:rgba(168,85,247,.12); border-color:rgba(233,63,216,.55); color:#e9d5ff}
+  html:not(.look-onyx) .tick{background:rgba(233,63,216,.13); border-color:rgba(233,63,216,.55)}
+  html:not(.look-onyx) .tick svg{stroke:#f0abfc}
+  @keyframes wordGlow{0%,100%{text-shadow:0 0 6px rgba(168,85,247,.30)} 50%{text-shadow:0 0 26px rgba(168,85,247,.95), 0 0 44px rgba(233,63,216,.55)}}
+  @keyframes numGlow{0%,100%{text-shadow:0 0 10px rgba(168,85,247,.25)} 50%{text-shadow:0 0 26px rgba(233,63,216,.55)}}
+  @keyframes ringPulse{0%,100%{box-shadow:0 30px 80px rgba(0,0,0,.55), 0 0 46px rgba(168,85,247,.22)} 50%{box-shadow:0 30px 80px rgba(0,0,0,.55), 0 0 78px rgba(233,63,216,.36)}}
+
+  /* Crown logo panel framed like the dashboard's central emblem */
+  html:not(.look-onyx) .logo-card{
+    border-color:rgba(233,63,216,.62);
+    box-shadow:0 30px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(168,85,247,.38), 0 0 72px rgba(233,63,216,.30);
+  }
+  html:not(.look-onyx) .logo-frame::before{
+    background:radial-gradient(circle, rgba(233,63,216,.34), rgba(168,85,247,.14) 55%, transparent 72%);
+  }
+  html:not(.look-onyx) .logo-card::after{
+    background:repeating-linear-gradient(0deg, rgba(233,63,216,.12) 0 1px, transparent 1px 5px), linear-gradient(180deg, transparent 38%, rgba(233,63,216,.40) 50%, transparent 62%);
+    background-size:100% 100%, 100% 220%;
+  }
+  html:not(.look-onyx) .mini-tile{border-color:rgba(168,85,247,.55); background:rgba(19,11,43,.88); box-shadow:0 0 18px rgba(168,85,247,.22)}
+  html:not(.look-onyx) .mini-tile:nth-child(2){border-color:rgba(233,63,216,.65)}
+
+  /* Ideas → Design → Development → Results stepper bar (hero) */
+  .dash-wrap{position:relative; z-index:2; padding-bottom:38px; margin-top:-28px}
+  .dash-stepper{
+    display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:10px 14px;
+    padding:15px 20px; border-radius:16px;
+    border:1px solid var(--line);
+    background:linear-gradient(120deg, rgba(168,85,247,.14), rgba(19,11,43,.92) 45%, rgba(233,63,216,.12));
+    font-family:"Sora",sans-serif;
+  }
+  html:not(.look-onyx) .dash-stepper{border-color:rgba(217,70,239,.55); box-shadow:0 0 0 1px rgba(168,85,247,.16) inset, 0 0 30px rgba(168,85,247,.20), 0 16px 36px rgba(0,0,0,.40)}
+  html.look-onyx .dash-stepper{background:var(--panel); box-shadow:none}
+  .dash-stepper .ds{display:inline-flex; align-items:center; gap:9px; font-size:12.5px; font-weight:800; letter-spacing:.20em; text-transform:uppercase; color:var(--ink); white-space:nowrap}
+  .dash-stepper .ds b{
+    font-size:11px; letter-spacing:.08em; color:#fff;
+    width:26px; height:26px; border-radius:50%; display:grid; place-items:center; flex:none;
+    background:linear-gradient(135deg, var(--violet), var(--magenta));
+  }
+  html:not(.look-onyx) .dash-stepper .ds b{box-shadow:0 0 12px rgba(233,63,216,.55)}
+  html.look-onyx .dash-stepper .ds b{background:var(--magenta); box-shadow:none}
+  .dash-stepper .ds-arrow{color:var(--magenta); font-weight:800; font-size:15px}
+  @media (max-width:560px){
+    .dash-wrap{margin-top:-16px; padding-bottom:30px}
+    .dash-stepper{gap:8px 9px; padding:13px 14px}
+    .dash-stepper .ds{font-size:11px; letter-spacing:.14em}
+    .dash-stepper .ds b{width:23px; height:23px; font-size:10px}
+  }
+
+  /* Process as a connected stepper on wide screens */
+  @media (min-width:981px){
+    .steps{position:relative}
+    .steps::before{
+      content:""; position:absolute; left:11%; right:11%; top:26px; height:2px; z-index:0;
+      background:linear-gradient(90deg, var(--violet), var(--magenta), var(--blue));
+      opacity:.55;
+    }
+    html.look-onyx .steps::before{opacity:.4}
+    .step{z-index:1}
+  }
+  .step .num{
+    display:grid; place-items:center; width:52px; height:52px; border-radius:50%;
+    font-size:22px; color:#fff; -webkit-text-stroke:0;
+    background:linear-gradient(135deg, var(--violet), var(--magenta));
+    position:relative; z-index:1;
+  }
+  html:not(.look-onyx) .step .num{box-shadow:0 0 18px rgba(233,63,216,.50), 0 0 8px rgba(168,85,247,.45)}
+  html.look-onyx .step .num{background:var(--magenta); box-shadow:none}
+
+  /* Banded sections: purple circuit etching + nebula wash */
+  html:not(.look-onyx) .includes, html:not(.look-onyx) .process, html:not(.look-onyx) .showcase{
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%23a855f7' stroke-opacity='.14' stroke-width='1.5'%3E%3Cpath d='M0 55 H70 L95 80 H220'/%3E%3Cpath d='M40 220 V130 L65 105 V0'/%3E%3Cpath d='M220 165 H150 L125 140 H0'/%3E%3Cpath d='M175 220 V95 L150 70'/%3E%3C/g%3E%3Cg fill='%23e93fd8' fill-opacity='.26'%3E%3Ccircle cx='70' cy='55' r='3'/%3E%3Ccircle cx='150' cy='165' r='3'/%3E%3Ccircle cx='65' cy='105' r='3'/%3E%3C/g%3E%3Cg fill='none' stroke='%23e93fd8' stroke-opacity='.15'%3E%3Ccircle cx='70' cy='55' r='7'/%3E%3Ccircle cx='150' cy='165' r='7'/%3E%3Crect x='168' y='168' width='34' height='34' rx='4'/%3E%3Crect x='179' y='179' width='12' height='12'/%3E%3C/g%3E%3C/svg%3E");
+    background-size:220px 220px;
+  }
+  html:not(.look-onyx) .showcase{
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%23a855f7' stroke-opacity='.13' stroke-width='1.5'%3E%3Cpath d='M0 55 H70 L95 80 H220'/%3E%3Cpath d='M40 220 V130 L65 105 V0'/%3E%3Cpath d='M220 165 H150 L125 140 H0'/%3E%3C/g%3E%3Cg fill='%23e93fd8' fill-opacity='.22'%3E%3Ccircle cx='70' cy='55' r='3'/%3E%3Ccircle cx='150' cy='165' r='3'/%3E%3C/g%3E%3C/svg%3E"),
+      radial-gradient(700px 400px at 90% 0%, rgba(233,63,216,.13), transparent 60%),
+      radial-gradient(700px 500px at 0% 40%, rgba(168,85,247,.15), transparent 60%),
+      var(--bg-2);
+    background-size:220px 220px, auto, auto, auto;
+  }
+  html:not(.look-onyx) .contact{
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%23a855f7' stroke-opacity='.12' stroke-width='1.5'%3E%3Cpath d='M0 55 H70 L95 80 H220'/%3E%3Cpath d='M40 220 V130 L65 105 V0'/%3E%3Cpath d='M220 165 H150 L125 140 H0'/%3E%3C/g%3E%3Cg fill='%23e93fd8' fill-opacity='.22'%3E%3Ccircle cx='70' cy='55' r='3'/%3E%3Ccircle cx='150' cy='165' r='3'/%3E%3C/g%3E%3C/svg%3E"),
+      radial-gradient(640px 380px at 50% 0%, rgba(233,63,216,.13), transparent 62%),
+      linear-gradient(160deg, #150826, var(--bg-2) 55%, #0d0620);
+    background-size:220px 220px, auto, auto;
+  }
+
+  /* Inner demo / form panels and controls in the dashboard palette */
+  html:not(.look-onyx) .chat-box{background:#070313; border-color:rgba(168,85,247,.38)}
+  html:not(.look-onyx) .msg.bot{background:#1c113f; border-color:rgba(168,85,247,.38)}
+  html:not(.look-onyx) .brief-out{background:#070313; border-color:rgba(233,63,216,.50)}
+  html:not(.look-onyx) .demo-result, html:not(.look-onyx) .quote-range{background:rgba(168,85,247,.08); border-color:rgba(233,63,216,.45)}
+  html:not(.look-onyx) .showcase-note{background:rgba(168,85,247,.07); border-color:rgba(233,63,216,.45)}
+  html:not(.look-onyx) .photo-row{background:rgba(168,85,247,.05); border-color:rgba(168,85,247,.38)}
+  html:not(.look-onyx) .field input:focus, html:not(.look-onyx) .field textarea:focus, html:not(.look-onyx) .field select:focus{
+    border-color:var(--magenta); box-shadow:0 0 0 3px rgba(233,63,216,.20);
+  }
+  html:not(.look-onyx) .check-option:has(input:checked){background:rgba(168,85,247,.12); border-color:rgba(233,63,216,.55)}
+  html:not(.look-onyx) .picker-row[aria-pressed="true"]{background:rgba(168,85,247,.13); border-color:rgba(233,63,216,.60); box-shadow:0 0 16px rgba(168,85,247,.22)}
+  html:not(.look-onyx) .quote-addon[aria-pressed="true"]{background:rgba(168,85,247,.14); border-color:rgba(233,63,216,.60)}
+  html:not(.look-onyx) footer{box-shadow:0 -1px 0 rgba(233,63,216,.30), 0 -14px 34px rgba(168,85,247,.10)}
+  html:not(.look-onyx) .to-top{border-color:rgba(233,63,216,.60); box-shadow:0 10px 30px rgba(0,0,0,.5), 0 0 20px rgba(233,63,216,.30)}
+  html:not(.look-onyx) .to-top svg{stroke:#f0abfc}
 </style>
 </head>
 <body>
@@ -709,6 +1091,10 @@
       <a href="#process">Process</a>
       <a href="#faq">FAQ</a>
     </nav>
+    <div class="look-switch">
+      <button type="button" class="btn btn-ghost btn-sm" id="lookSwitch" aria-pressed="false" aria-describedby="lookSwitchNote"><span aria-hidden="true">◐</span>&nbsp;Switch Look</button>
+      <span class="look-switch-note" id="lookSwitchNote">Want to see the website in a different way? Tap here if this look hurts your eyes.</span>
+    </div>
     <a class="btn btn-call btn-sm" href="tel:+18166816767">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
       816-681-6767
@@ -777,8 +1163,6 @@
         <div class="hero-ctas">
           <a class="btn btn-call" href="mailto:Precisionwebconcepts@gmail.com">Email us to get started</a>
           <a class="btn btn-ghost" href="#brief">Plan your website</a>
-          <a class="btn btn-ghost" href="#showcase">Try it live ↓</a>
-          <span class="holo-hint" aria-hidden="true">Tap any main button — watch it shatter into sharp pieces, then rebuild. Then try the features below.</span>
         </div>
         <div class="hero-points">
           <span><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> New websites, done right</span>
@@ -799,6 +1183,14 @@
           <span class="mini-tile"><b>◈</b> INSTANT QUOTES</span>
           <span class="mini-tile"><b>◈</b> TEXT BACK</span>
         </div>
+      </div>
+    </div>
+    <div class="wrap dash-wrap">
+      <div class="dash-stepper" aria-label="How every project moves: ideas, design, development, results">
+        <span class="ds"><b>01</b> Ideas</span><span class="ds-arrow" aria-hidden="true">→</span>
+        <span class="ds"><b>02</b> Design</span><span class="ds-arrow" aria-hidden="true">→</span>
+        <span class="ds"><b>03</b> Development</span><span class="ds-arrow" aria-hidden="true">→</span>
+        <span class="ds"><b>04</b> Results</span>
       </div>
     </div>
   </div>
@@ -1012,6 +1404,10 @@
               <button type="button" class="pill" aria-pressed="false">Something else</button>
             </div>
           </div>
+          <div class="field" id="typeOtherField" hidden>
+            <label for="bizTypeOther">You picked “Something else” — what kind of business is it?</label>
+            <input type="text" id="bizTypeOther" placeholder="e.g. Mobile dog grooming" autocomplete="off" />
+          </div>
           <div class="field">
             <span class="flabel" id="goalLabel">Why do you want a website?</span>
             <div class="check-list" role="group" aria-labelledby="goalLabel" id="goalChecks">
@@ -1041,7 +1437,6 @@
           <div class="brief-actions">
             <button type="button" class="btn btn-call btn-sm" id="submitBtn">Submit my brief →</button>
             <button type="button" class="btn btn-ghost btn-sm" id="copyBtn">Copy brief</button>
-            <a class="btn btn-ghost btn-sm" href="mailto:Precisionwebconcepts@gmail.com">Email us instead</a>
             <span class="copied" id="copiedMsg" role="status"></span>
           </div>
           <p style="margin-top:16px; color:var(--muted-2); font-size:14.5px">Submitting opens your email app with this brief pre-filled to Precisionwebconcepts@gmail.com — nothing is sent until you press send there.</p>
@@ -1058,8 +1453,7 @@
         <h2>Reviews for Precision Web Concepts</h2>
         <p>This is where real client reviews will live. Had a website built by Precision? Your words here help the next small business decide — leave yours below.</p>
       </div>
-      <div class="brief-grid">
-        <div class="panel">
+      <div class="reviews-list">
           <figure class="review-card">
             <div class="stars" role="img" aria-label="Rated 5 out of 5 stars">★★★★★</div>
             <blockquote>Precision Web Concepts did a great job building our website for Better Than Your Husband Handyman Services, LLC! They were easy to work with, listened to what we wanted, and did an excellent job bringing our vision to life. We are very happy with how our website turned out and appreciate all their hard work. We would definitely recommend Precision Web Concepts to any small business looking for a professional website!</blockquote>
@@ -1076,35 +1470,9 @@
               <span>Mike and Son's Cabinets</span>
             </figcaption>
           </figure>
-        </div>
-        <div class="panel">
-          <div class="field">
-            <label for="revName">Your name</label>
-            <input type="text" id="revName" placeholder="e.g. Jordan Lee" autocomplete="name" />
-          </div>
-          <div class="field">
-            <label for="revBiz">Your business (optional)</label>
-            <input type="text" id="revBiz" placeholder="e.g. Lee's Landscaping" autocomplete="organization" />
-          </div>
-          <div class="field">
-            <label for="revStars">Your rating</label>
-            <select id="revStars">
-              <option value="5">★★★★★ — 5 stars</option>
-              <option value="4">★★★★☆ — 4 stars</option>
-              <option value="3">★★★☆☆ — 3 stars</option>
-              <option value="2">★★☆☆☆ — 2 stars</option>
-              <option value="1">★☆☆☆☆ — 1 star</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="revText">Your review</label>
-            <textarea id="revText" placeholder="What was it like working with Precision Web Concepts? What did your new website do for your business?"></textarea>
-          </div>
-          <div class="brief-actions">
-            <button type="button" class="btn btn-call btn-sm" id="reviewBtn">Leave a review →</button>
-            <span class="copied" id="reviewMsg" role="status"></span>
-          </div>
-        </div>
+      </div>
+      <div class="review-cta">
+        <a class="btn btn-call" href="mailto:Precisionwebconcepts@gmail.com?subject=Review%20for%20Precision%20Web%20Concepts&amp;body=My%20review%20of%20Precision%20Web%20Concepts%3A%0A%0ARating%20(out%20of%205%20stars)%3A%20%0A%0AReview%3A%20%0A%0AName%3A%20%0ABusiness%3A%20%0A%0AYou%20have%20my%20permission%20to%20post%20this%20review%20on%20the%20Precision%20Web%20Concepts%20website.">Leave a review →</a>
       </div>
     </div>
   </section>
@@ -1667,7 +2035,10 @@
     });
   });
   document.querySelectorAll('[data-legal-close]').forEach(function(link){
-    link.addEventListener('click', function(){
+    link.addEventListener('click', function(e){
+      /* Close in place: stop the #top jump so the visitor stays
+         right where they were at the bottom of the page. */
+      e.preventDefault();
       hideLegal();
       if(history.replaceState) history.replaceState(null, '', location.pathname + location.search);
     });
@@ -1688,6 +2059,8 @@
 <script>
 (function(){
   var nameEl = document.getElementById('bizName');
+  var typeOtherField = document.getElementById('typeOtherField');
+  var typeOtherEl = document.getElementById('bizTypeOther');
   var notesEl = document.getElementById('bizNotes');
   var out = document.getElementById('briefOut');
   var copiedMsg = document.getElementById('copiedMsg');
@@ -1702,6 +2075,11 @@
       group.querySelectorAll('.pill').forEach(function(p){ p.setAttribute('aria-pressed','false'); });
       btn.setAttribute('aria-pressed', wasOn ? 'false' : 'true');
       state[key] = wasOn ? '' : btn.textContent.trim();
+      if(key === 'type' && typeOtherField){
+        var showOther = state.type === 'Something else';
+        typeOtherField.hidden = !showOther;
+        if(showOther && typeOtherEl) typeOtherEl.focus();
+      }
       render();
     });
   }
@@ -1792,7 +2170,13 @@
     lines.push('Hi Precision Web Concepts — I\'d like a new website.');
     lines.push('');
     lines.push('Business: ' + (nameEl.value.trim() || '(not filled in yet)'));
-    if(state.type) lines.push('Type of business: ' + state.type);
+    if(state.type){
+      var typeLine = state.type;
+      if(state.type === 'Something else' && typeOtherEl && typeOtherEl.value.trim()){
+        typeLine = 'Something else — ' + typeOtherEl.value.trim();
+      }
+      lines.push('Type of business: ' + typeLine);
+    }
     if(state.goals && state.goals.length) lines.push('Why I want a website: ' + state.goals.join(', '));
     if(notesEl.value.trim()){ lines.push(''); lines.push('Notes: ' + notesEl.value.trim()); }
     var photos = photoDescriptions();
@@ -1805,7 +2189,7 @@
   }
 
   function render(){
-    var empty = !nameEl.value.trim() && !state.type && !(state.goals && state.goals.length) && !notesEl.value.trim() && !photoDescriptions().length;
+    var empty = !nameEl.value.trim() && !state.type && !(typeOtherEl && typeOtherEl.value.trim()) && !(state.goals && state.goals.length) && !notesEl.value.trim() && !photoDescriptions().length;
     if(empty){
       out.textContent = 'Start typing on the left and your brief will appear here — ready to submit by email, or email Precisionwebconcepts@gmail.com to get started.';
     } else {
@@ -1813,6 +2197,7 @@
     }
   }
   nameEl.addEventListener('input', render);
+  if(typeOtherEl) typeOtherEl.addEventListener('input', render);
   notesEl.addEventListener('input', render);
   render();
 
@@ -1844,7 +2229,7 @@
 <script>
 (function(){
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var COLORS = ['#00cfff','#a855f7','#e93fd8','#3b82f6','#ffffff','#00e5a0'];
+  var COLORS = ['#a855f7','#e93fd8','#f472b6','#818cf8','#ffffff','#c084fc'];
 
   /* --- corner brackets on every main button --- */
   document.querySelectorAll('.btn').forEach(function(btn){
@@ -1869,8 +2254,8 @@
     document.body.prepend(bg);
     var bctx = bg.getContext('2d');
     var traces = [], chips = [], glyphs = [], W = 0, H = 0;
-    var TRACE_COLORS = ['rgba(0,207,255,', 'rgba(168,85,247,', 'rgba(59,130,246,'];
-    var PULSE_COLORS = ['#00cfff', '#e93fd8', '#7dd7ff', '#a855f7'];
+    var TRACE_COLORS = ['rgba(168,85,247,', 'rgba(233,63,216,', 'rgba(129,140,248,'];
+    var PULSE_COLORS = ['#e93fd8', '#a855f7', '#f9a8d4', '#818cf8'];
 
     function buildTrace(){
       /* walk a PCB run: start on a coarse grid, run straight, jog at 45
@@ -1965,7 +2350,7 @@
         g.y -= g.s; if(g.y < -14){ g.y = H + 14; g.x = Math.random() * W; }
         if(Math.random() < .002) g.ch = g.ch === '0' ? '1' : '0';
         bctx.globalAlpha = .10 + .05 * Math.sin(now * .0016 + g.ph);
-        bctx.fillStyle = '#00cfff'; bctx.fillText(g.ch, g.x, g.y);
+        bctx.fillStyle = '#c084fc'; bctx.fillText(g.ch, g.x, g.y);
       });
       traces.forEach(function(tr){
         /* the etched trace itself */
@@ -2002,21 +2387,23 @@
   }
 
   /* --- GLASS SHARD disintegrate -> reconnect ---
-     The button cracks like a pane of glass. A white fracture flash runs
-     across it, then the pane breaks into large, pointed shards: sharp
-     triangular and polygonal pieces of CLEAR glass — translucent fills
-     with only a whisper of blue / violet tint, bright white edges and a
-     lit facet line on every piece. No round pieces, no solid confetti
-     colours, no dark paper outlines, no soft glow blobs. The shards fly
-     outward from the centre as separate individual pieces with clear
-     gaps between them, hang for a beat, then fly back together and
-     rebuild the button. --- */
+     The button itself cracks like a pane of tinted glass and breaks
+     into 12–16 large triangular shards that tile its exact shape —
+     each piece keeps the tint of the part of the button it came from,
+     with a translucent glass body, one lit facet and a crisp polished
+     white edge. No tiny particles, no confetti, no round pieces, no
+     glow blobs. The pieces part a short, heavy distance with clean
+     empty gaps between them, hang for a beat with the button fully
+     hidden underneath, then fly back together and rebuild it. --- */
   function disintegrate(el, done){
     if(reduce || !el){ if(done) done(); return; }
+    /* The onyx look is a no-effects look — buttons there just work. */
+    if(document.documentElement.classList.contains('look-onyx')){ if(done) done(); return; }
     if(el.dataset.holoBusy === '1'){ if(done) done(); return; }
-    el.dataset.holoBusy = '1';
     var rect = el.getBoundingClientRect();
-    var pad = 200;
+    if(rect.width < 8 || rect.height < 8){ if(done) done(); return; }
+    el.dataset.holoBusy = '1';
+    var pad = 120;
     var canvas = document.createElement('canvas');
     canvas.className = 'particle-canvas';
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -2028,140 +2415,161 @@
     canvas.style.top = (rect.top - pad) + 'px';
     document.body.appendChild(canvas);
     var ctx = canvas.getContext('2d'); ctx.scale(dpr, dpr);
-    /* clear-glass tints: pale ice blue, faint violet, near-clear white */
-    var TINTS = [[216,240,255],[198,224,255],[226,212,255],[208,202,255],[240,250,255],[188,234,255]];
-    /* pointed shard outlines — the first vertex of each is a sharp tip,
-       so every piece reads as a splinter of glass, never a blob */
-    var SHAPES = [
-      [[0,-1.9],[0.62,0.95],[-0.55,0.75]],
-      [[0,-1.6],[1.05,0.7],[0.1,0.35],[-0.95,0.9]],
-      [[0,-2.15],[0.30,1.05],[-0.30,0.7]],
-      [[0,-1.45],[1.25,0.95],[-1.15,0.85]],
-      [[0,-1.75],[0.85,0.55],[0.45,1.05],[-0.7,0.8]],
-      [[0,-1.35],[0.95,-0.15],[0.35,1.15],[-0.85,0.45]]
-    ];
     var cx = pad + rect.width/2, cy = pad + rect.height/2;
-    /* lay the shards on a jittered grid so together they cover the whole
-       button like one cracked pane, then burst outward from its centre */
-    var cols = Math.max(5, Math.round(Math.sqrt(54 * rect.width / Math.max(rect.height, 1))));
-    var rows = Math.max(3, Math.round(54 / cols));
-    var cellW = rect.width/cols, cellH = rect.height/rows;
-    var parts = [];
-    for(var gy=0; gy<rows; gy++){
-      for(var gx=0; gx<cols; gx++){
-        var ox = pad + (gx + .5)*cellW + (Math.random()-.5)*cellW*.55;
-        var oy = pad + (gy + .5)*cellH + (Math.random()-.5)*cellH*.55;
-        var ang = Math.atan2(oy - cy, ox - cx) + (Math.random()-.5)*.85;
-        var dist = 100 + Math.random()*170;
-        var tint = TINTS[Math.floor(Math.random()*TINTS.length)];
-        parts.push({
-          ox:ox, oy:oy,
-          dx:ox + Math.cos(ang)*dist, dy:oy + Math.sin(ang)*dist - Math.random()*30,
-          size:9 + Math.random()*7.5,
-          verts:SHAPES[Math.floor(Math.random()*SHAPES.length)],
-          tint:tint, fillA:.26 + Math.random()*.24,
-          rot:Math.random()*Math.PI*2, spin:(Math.random()-.5)*2.6,
-          glint:Math.random() < .3
-        });
+    /* The button's own gradient colours, sampled left to right, so each
+       shard keeps the tint of the part of the button it came from —
+       violet on the left, magenta in the middle, blue on the right. */
+    var STOPS = [[168,85,247],[233,63,216],[129,140,248]];
+    function tintAt(fx){
+      var seg = Math.min(1.999, Math.max(0, fx * 2));
+      var i = Math.floor(seg), k = seg - i;
+      var a = STOPS[i], b = STOPS[i + 1];
+      return [Math.round(a[0] + (b[0]-a[0])*k), Math.round(a[1] + (b[1]-a[1])*k), Math.round(a[2] + (b[2]-a[2])*k)];
+    }
+    /* --- Fracture the button itself into glass shards ---
+       A jittered grid is laid over the button's exact rectangle and
+       every cell is split corner-to-corner, so the pieces TILE the
+       button with no gaps: together they ARE the button. 12–16 large,
+       sharp triangular shards — real broken-glass scale, not a spray
+       of tiny particles. Interior grid points are jittered so no two
+       shards match and every edge is a straight, clean fracture line. */
+    var cols = rect.width > 190 ? 4 : 3;
+    var rows = 2;
+    var cellW = rect.width / cols, cellH = rect.height / rows;
+    var grid = [];
+    for(var gy = 0; gy <= rows; gy++){
+      grid[gy] = [];
+      for(var gx = 0; gx <= cols; gx++){
+        var px = pad + gx * cellW, py = pad + gy * cellH;
+        if(gx > 0 && gx < cols) px += (Math.random() - .5) * cellW * .5;
+        if(gy > 0 && gy < rows) py += (Math.random() - .5) * cellH * .5;
+        grid[gy][gx] = [px, py];
       }
     }
-    /* jagged fracture lines for the opening crack flash */
-    var cracks = [];
-    for(var ci=0; ci<8; ci++){
-      var ca = (ci/8)*Math.PI*2 + Math.random()*.5;
-      var pts = [[cx, cy]], px = cx, py = cy, seg = 3;
-      for(var cs=0; cs<seg; cs++){
-        var stepLen = (Math.max(rect.width, rect.height)*.62)/seg * (.7 + Math.random()*.6);
-        var sa = ca + (Math.random()-.5)*.55;
-        px += Math.cos(sa)*stepLen; py += Math.sin(sa)*stepLen*.72;
-        pts.push([px, py]);
-      }
-      cracks.push(pts);
+    var shards = [];
+    function addShard(pts){
+      var mx = 0, my = 0;
+      pts.forEach(function(p){ mx += p[0]; my += p[1]; });
+      mx /= pts.length; my /= pts.length;
+      var ang = Math.atan2(my - cy, mx - cx);
+      var cdist = Math.hypot(mx - cx, my - cy);
+      /* Pieces travel only a short, heavy distance — real glass drops
+         and separates, it does not explode across the screen. */
+      var dist = 16 + cdist * .45 + Math.random() * 14;
+      shards.push({
+        pts: pts, mx: mx, my: my,
+        dx: mx + Math.cos(ang) * dist,
+        dy: my + Math.sin(ang) * dist + 6 + Math.random() * 10,
+        tint: tintAt((mx - pad) / rect.width),
+        spin: (Math.random() - .5) * .55,
+        tilt: .82 + Math.random() * .14,
+        delay: Math.random() * .03
+      });
     }
-    /* irregular pointed ring for the shockwave — angular, never a circle */
-    var ring = [];
-    for(var ri=0; ri<10; ri++){ var ra = (ri/10)*Math.PI*2; ring.push([Math.cos(ra), Math.sin(ra)*.62, .82 + Math.random()*.4]); }
+    for(var sy = 0; sy < rows; sy++){
+      for(var sx = 0; sx < cols; sx++){
+        var A = grid[sy][sx], B = grid[sy][sx + 1], C = grid[sy + 1][sx + 1], D = grid[sy + 1][sx];
+        if((sx + sy) % 2 === 0){ addShard([A, B, C]); addShard([A, C, D]); }
+        else { addShard([A, B, D]); addShard([B, C, D]); }
+      }
+    }
+    /* Fracture lines for the opening crack: from a random impact point
+       near the middle, jagged white cracks run to the button's corners
+       and edge midpoints — the pane visibly cracks before it parts. */
+    var ix = cx + (Math.random() - .5) * rect.width * .3;
+    var iy = cy + (Math.random() - .5) * rect.height * .4;
+    var crackTargets = [
+      [pad, pad], [cx, pad], [pad + rect.width, pad],
+      [pad + rect.width, cy], [pad + rect.width, pad + rect.height],
+      [cx, pad + rect.height], [pad, pad + rect.height], [pad, cy]
+    ];
+    var cracks = crackTargets.map(function(tp){
+      var pts = [[ix, iy]];
+      for(var s = 1; s <= 3; s++){
+        var f = s / 3;
+        pts.push([
+          ix + (tp[0] - ix) * f + (s < 3 ? (Math.random() - .5) * 9 : 0),
+          iy + (tp[1] - iy) * f + (s < 3 ? (Math.random() - .5) * 7 : 0)
+        ]);
+      }
+      return pts;
+    });
     el.classList.add('disintegrating');
-    var start = performance.now(), total = 1650, finished = false;
+    var start = performance.now(), total = 1500, finished = false;
     function finish(){ if(finished) return; finished = true; if(canvas.parentNode) canvas.remove(); delete el.dataset.holoBusy; el.classList.remove('disintegrating'); if(done) done(); }
-    function easeOut(t){ return 1 - Math.pow(1-t,3); } function easeInOut(t){ return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2; }
+    function easeOut(t){ return 1 - Math.pow(1 - t, 3); }
+    function easeInOut(t){ return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+    function drawShard(p, x, y, rot, squash, alpha){
+      ctx.save();
+      ctx.translate(x, y); ctx.rotate(rot); ctx.scale(1, squash); ctx.translate(-p.mx, -p.my);
+      ctx.globalAlpha = alpha; ctx.lineJoin = 'miter';
+      ctx.beginPath();
+      p.pts.forEach(function(v, i){ if(i === 0) ctx.moveTo(v[0], v[1]); else ctx.lineTo(v[0], v[1]); });
+      ctx.closePath();
+      /* Glass body: the button's tint, mostly translucent like real
+         tinted glass — you can almost see through each piece. */
+      var g = ctx.createLinearGradient(p.pts[0][0], p.pts[0][1], p.pts[2][0], p.pts[2][1]);
+      g.addColorStop(0, 'rgba(255,255,255,.34)');
+      g.addColorStop(.45, 'rgba(' + p.tint[0] + ',' + p.tint[1] + ',' + p.tint[2] + ',.42)');
+      g.addColorStop(1, 'rgba(' + p.tint[0] + ',' + p.tint[1] + ',' + p.tint[2] + ',.20)');
+      ctx.fillStyle = g; ctx.fill();
+      /* One lit facet: a pale wedge from the centroid to the shard's
+         top edge, the way a bevelled glass edge catches light. */
+      var top = p.pts[0];
+      p.pts.forEach(function(v){ if(v[1] < top[1]) top = v; });
+      var other = p.pts[(p.pts.indexOf(top) + 1) % p.pts.length];
+      ctx.beginPath(); ctx.moveTo(p.mx, p.my); ctx.lineTo(top[0], top[1]); ctx.lineTo(other[0], other[1]); ctx.closePath();
+      ctx.fillStyle = 'rgba(255,255,255,.20)'; ctx.fill();
+      /* Edge: a faint thick ice rim under a crisp bright white line —
+         the polished edge of cut glass. */
+      ctx.beginPath();
+      p.pts.forEach(function(v, i){ if(i === 0) ctx.moveTo(v[0], v[1]); else ctx.lineTo(v[0], v[1]); });
+      ctx.closePath();
+      ctx.strokeStyle = 'rgba(170,228,255,.35)'; ctx.lineWidth = 2.6; ctx.stroke();
+      ctx.strokeStyle = 'rgba(255,255,255,.92)'; ctx.lineWidth = 1.1; ctx.stroke();
+      ctx.restore();
+    }
     function frame(now){
-      var t = Math.min((now - start)/total, 1);
-      ctx.clearRect(0,0,rect.width+pad*2, rect.height+pad*2);
+      var t = Math.min((now - start) / total, 1);
+      ctx.clearRect(0, 0, rect.width + pad * 2, rect.height + pad * 2);
       ctx.shadowBlur = 0;
-      /* 1 — fracture flash: white jagged cracks shoot across the pane */
-      if(t < 0.15){
-        var fa = (1 - t/0.15);
-        ctx.save(); ctx.globalAlpha = fa*.95; ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 1.6; ctx.lineJoin = 'miter';
+      /* 1 — the pane cracks: jagged white fracture lines shoot from the
+         impact point while the button flashes and vanishes behind them
+         (holoDissolve). The shards are still seated, covering it. */
+      if(t < 0.10){
+        var fa = 1 - t / 0.10;
+        ctx.save(); ctx.globalAlpha = fa * .95; ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 1.5; ctx.lineJoin = 'miter';
         cracks.forEach(function(line){
           ctx.beginPath();
-          line.forEach(function(pt, idx){ if(idx===0) ctx.moveTo(pt[0], pt[1]); else ctx.lineTo(pt[0], pt[1]); });
+          line.forEach(function(pt, i){ if(i === 0) ctx.moveTo(pt[0], pt[1]); else ctx.lineTo(pt[0], pt[1]); });
           ctx.stroke();
         });
         ctx.restore();
       }
-      /* 2 — sharp polygonal shock ring, expanding and fading (never a circle) */
-      if(t < 0.32){
-        var sk = easeOut(t/0.32);
-        ctx.save(); ctx.globalAlpha = (1-sk)*.8; ctx.strokeStyle = 'rgba(190,235,255,.9)'; ctx.lineWidth = 1.6; ctx.lineJoin = 'miter';
-        ctx.beginPath();
-        ring.forEach(function(rp, idx){
-          var rx = cx + rp[0]*rp[2]*(rect.width*.28 + sk*rect.width*.85);
-          var ry = cy + rp[1]*rp[2]*(rect.width*.28 + sk*rect.width*.85);
-          if(idx===0) ctx.moveTo(rx, ry); else ctx.lineTo(rx, ry);
-        });
-        ctx.closePath(); ctx.stroke(); ctx.restore();
-      }
-      parts.forEach(function(p){
-        var x, y, rot, k;
-        /* Phase 1 (t < .08): shards still seated in the pane while the
-           fracture flash runs and the button itself flashes, cracks and
-           vanishes — the pieces have not left a still-solid button.
-           Phase 2 (.08–.40): the pane gives way, shards burst outward.
-           Phase 3 (.40–.62): shards hang fully apart; the button is
-           completely hidden underneath (holoDissolve holds opacity 0 /
-           visibility hidden), so nothing of it shows behind the pieces.
-           Phase 4 (.62–1): shards fly back, un-spin, and land exactly on
-           their seats as holoReform brings the button back — the pieces
-           rebuild into the button (or the tap then follows through to
-           whatever the button opens). */
-        if(t < 0.08){ x = p.ox; y = p.oy; rot = p.rot; }
-        else if(t < 0.40){ k = easeOut((t-0.08)/0.32); x = p.ox + (p.dx-p.ox)*k; y = p.oy + (p.dy-p.oy)*k; rot = p.rot + p.spin*k; }
-        else if(t < 0.62){ x = p.dx; y = p.dy + Math.sin(now*.0026 + p.ox)*2.5; rot = p.rot + p.spin; }
-        else { k = easeInOut((t-0.62)/0.38); x = p.dx + (p.ox-p.dx)*k; y = p.dy + (p.oy-p.dy)*k; rot = p.rot + p.spin*(1-k); }
-        var alpha = 1;
-        if(t > 0.93) alpha = Math.max((1-t)/0.07, 0);
-        ctx.save(); ctx.translate(x,y); ctx.rotate(rot); ctx.globalAlpha = alpha; ctx.lineJoin = 'miter';
-        /* clear glass body — translucent tinted fill only */
-        ctx.beginPath();
-        p.verts.forEach(function(vt, idx){ var vx = vt[0]*p.size, vy = vt[1]*p.size; if(idx===0) ctx.moveTo(vx,vy); else ctx.lineTo(vx,vy); });
-        ctx.closePath();
-        ctx.fillStyle = 'rgba(' + p.tint[0] + ',' + p.tint[1] + ',' + p.tint[2] + ',' + p.fillA + ')';
-        ctx.fill();
-        /* lit facet: a brighter wedge from the centre out to the sharp tip */
-        ctx.beginPath(); ctx.moveTo(0,0);
-        ctx.lineTo(p.verts[0][0]*p.size, p.verts[0][1]*p.size);
-        ctx.lineTo(p.verts[1][0]*p.size, p.verts[1][1]*p.size);
-        ctx.closePath(); ctx.fillStyle = 'rgba(255,255,255,.16)'; ctx.fill();
-        /* facet line — centre to tip catches the light */
-        ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(p.verts[0][0]*p.size, p.verts[0][1]*p.size);
-        ctx.strokeStyle = 'rgba(255,255,255,.55)'; ctx.lineWidth = .8; ctx.stroke();
-        /* crisp white glass edge over a faint ice-blue rim */
-        ctx.beginPath();
-        p.verts.forEach(function(vt, idx){ var vx2 = vt[0]*p.size, vy2 = vt[1]*p.size; if(idx===0) ctx.moveTo(vx2,vy2); else ctx.lineTo(vx2,vy2); });
-        ctx.closePath();
-        ctx.strokeStyle = 'rgba(150,220,255,.38)'; ctx.lineWidth = 3; ctx.stroke();
-        ctx.strokeStyle = 'rgba(255,255,255,.95)'; ctx.lineWidth = 1.4; ctx.stroke();
-        ctx.restore();
-        /* a few shards throw a tiny star glint while they hang apart */
-        if(p.glint && t > 0.40 && t < 0.64){
-          var ga = Math.sin((t-0.40)/0.24*Math.PI);
-          ctx.save(); ctx.translate(x, y); ctx.globalAlpha = ga*.9; ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 1.2;
-          var gl = 7 + ga*5;
-          ctx.beginPath(); ctx.moveTo(-gl,0); ctx.lineTo(gl,0); ctx.moveTo(0,-gl); ctx.lineTo(0,gl); ctx.stroke(); ctx.restore();
-        }
+      shards.forEach(function(p){
+        var x, y, rot, squash, alpha = 1;
+        /* Phase 1 (t < .07 + delay): seated in the pane as it cracks.
+           Phase 2 (.07–.38): the pane parts — shards slide a short way
+           out, tip in 3D (vertical squash) and turn slightly, opening
+           clean gaps of empty space between the pieces.
+           Phase 3 (.38–.60): fully apart and still; the button stays
+           completely hidden underneath — no ghost button.
+           Phase 4 (.60–1): shards fly back, un-tip, un-turn and land
+           exactly on their seats. The button stays completely hidden
+           for this whole phase too — it is only rebuilt (holoReform)
+           once every shard has fully returned, at the very end. */
+        var lt = Math.max(0, t - p.delay);
+        if(lt < 0.07){ x = p.mx; y = p.my; rot = 0; squash = 1; }
+        else if(lt < 0.38){ var k = easeOut((lt - 0.07) / 0.31); x = p.mx + (p.dx - p.mx) * k; y = p.my + (p.dy - p.my) * k; rot = p.spin * k; squash = 1 - (1 - p.tilt) * k; }
+        else if(lt < 0.60){ x = p.dx; y = p.dy + Math.sin(now * .0018 + p.mx) * 1.2; rot = p.spin; squash = p.tilt; }
+        else { var k2 = easeInOut((lt - 0.60) / 0.40); x = p.dx + (p.mx - p.dx) * k2; y = p.dy + (p.my - p.dy) * k2; rot = p.spin * (1 - k2); squash = p.tilt + (1 - p.tilt) * k2; }
+        if(t > 0.985) alpha = Math.max((1 - t) / 0.015, 0);
+        drawShard(p, x, y, rot, squash, alpha);
       });
-      if(t > 0.74 && el.classList.contains('disintegrating')){ el.classList.remove('disintegrating'); el.classList.add('reformed'); setTimeout(function(){ el.classList.remove('reformed'); }, 650); }
+      /* Rebuild ONLY after the shards have fully flown back and landed
+         (t >= .99): swapping to holoReform any earlier made the solid
+         button appear while pieces were still in the air. */
+      if(t >= 0.99 && el.classList.contains('disintegrating')){ el.classList.remove('disintegrating'); el.classList.add('reformed'); setTimeout(function(){ el.classList.remove('reformed'); }, 650); }
       if(t < 1){ requestAnimationFrame(frame); } else { finish(); }
     }
     requestAnimationFrame(frame);
@@ -2196,6 +2604,9 @@
      Excludes demo controls inside tiles so their taps stay instant. */
   document.querySelectorAll('button.btn, .pill').forEach(function(b){
     if(b.closest('.tile')) return;
+    /* The Switch Look button changes the whole page the instant it is
+       tapped — no shatter delay on that one. */
+    if(b.id === 'lookSwitch') return;
     b.addEventListener('click', function(){ disintegrate(b, null); });
   });
 
@@ -2401,34 +2812,26 @@
     });
   }
 
-  /* --- Leave a review (opens email, pre-filled, nothing sent automatically) --- */
-  var revBtn = document.getElementById('reviewBtn');
-  var revMsg = document.getElementById('reviewMsg');
-  if(revBtn){
-    revBtn.addEventListener('click', function(){
-      var name = document.getElementById('revName').value.trim();
-      var biz = document.getElementById('revBiz').value.trim();
-      var stars = document.getElementById('revStars').value;
-      var text = document.getElementById('revText').value.trim();
-      var starStr = '';
-      for(var i = 0; i < 5; i++) starStr += i < parseInt(stars, 10) ? '★' : '☆';
-      var lines = [];
-      lines.push('My review of Precision Web Concepts:');
-      lines.push('');
-      lines.push('Rating: ' + starStr + ' (' + stars + ' of 5 stars)');
-      lines.push('');
-      lines.push(text || '(write your review here)');
-      lines.push('');
-      lines.push('— ' + (name || '(your name)') + (biz ? ', ' + biz : ''));
-      lines.push('');
-      lines.push('You have my permission to post this review on the Precision Web Concepts website.');
-      var subject = 'Review for Precision Web Concepts' + (biz ? ' — ' + biz : (name ? ' — ' + name : ''));
-      var href = 'mailto:Precisionwebconcepts@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
-      revMsg.textContent = 'Opening your email app…';
-      setTimeout(function(){ revMsg.textContent = ''; }, 4000);
-      var a = document.createElement('a'); a.href = href; document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    });
+})();
+</script>
+<script>
+/* Switch Look: swap between the futuristic dark neon look and the
+   Onyx Black & Hellfire Red look, and remember the visitor's choice for
+   their next visit. */
+(function(){
+  var btn = document.getElementById('lookSwitch');
+  if(!btn) return;
+  var root = document.documentElement;
+  function sync(){
+    btn.setAttribute('aria-pressed', root.classList.contains('look-onyx') ? 'true' : 'false');
   }
+  sync();
+  btn.addEventListener('click', function(){
+    var onyx = root.classList.toggle('look-onyx');
+    /* Both looks are dark, so the color-scheme stays "dark". */
+    try{ localStorage.setItem('pwc-look', onyx ? 'onyx' : 'neon'); }catch(e){}
+    sync();
+  });
 })();
 </script>
 </body>
